@@ -4,6 +4,8 @@ const http = require('http');
 const morgan = require('morgan');
 const path = require('path');
 
+const api = require('./server/routes/api');
+
 const app = express();
 
 // MIDDLEWARE
@@ -13,6 +15,8 @@ app.use(bodyParser.urlencoded());
 app.use(morgan('combined'));
 
 app.use(express.static(path.join(__dirname, '../build')));
+
+app.use('/api', api);
 
 // ROUTING
 
