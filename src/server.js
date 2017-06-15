@@ -1,10 +1,12 @@
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
 const express = require('express');
 const http = require('http');
 const morgan = require('morgan');
 const path = require('path');
-
 const api = require('./server/routes/api');
+
+dotenv.config();
 
 const app = express();
 
