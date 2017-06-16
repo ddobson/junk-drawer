@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-const link = new Schema({
+const linkSchema = new Schema({
   destination: {
     type: String,
     required: true,
@@ -18,12 +18,13 @@ const link = new Schema({
     type: String,
     required: true,
   },
-  timestamps: true,
   title: {
     type: String,
   },
+}, {
+  timestamps: true,
 });
 
-const Link = new mongoose.model('Link', link);
+const Link = mongoose.model('Link', linkSchema);
 
 module.exports = Link;
