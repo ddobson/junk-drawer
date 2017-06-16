@@ -1,4 +1,5 @@
 const axios = require('axios');
+const parser = require('url-parse');
 const Link = require('../models/link');
 
 function createLinkWithRebradly(data) {
@@ -13,8 +14,15 @@ function createLinkWithRebradly(data) {
   });
 }
 
+function extractOriginalHost(destination) {
+  const parsedURL = parser(destination);
+
+  return `${parsedURL.protocol}//${parsedURL.hostname}`;
+}
+
 function parseResponseData(resData) {
   const data = {
+    originalHost: extractOriginalHost(resData.destination),
     rebrandlyId: resData.id,
     destination: resData.destination,
     slashtag: resData.slashtag,

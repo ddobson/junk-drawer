@@ -11,6 +11,10 @@ const linkSchema = new Schema({
     type: Number,
     required: true,
   },
+  originalHost: {
+    type: String,
+    required: true,
+  },
   slashtag: {
     type: String,
     required: true,
