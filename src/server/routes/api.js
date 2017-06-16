@@ -8,7 +8,6 @@ router.get('/', (req, res) => {
 
 router.post('/create-link', (req, res, next) => {
   rebrandly.createCustomLink(req.body)
-    .then(response => response.data)
     .then(data => res.json(data))
     .catch(err => next(err));
 });
