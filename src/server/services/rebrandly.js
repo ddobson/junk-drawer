@@ -12,13 +12,26 @@ function createLinkWithRebradly(data) {
   });
 }
 
+function parseResponseData(resData) {
+  const data = {
+    rebrandlyId: resData.id,
+    destination: resData.destination,
+    slashtag: resData.slashtag,
+    shortUrl: resData.shortUrl,
+    title: resData.title,
+  };
+
+  return data;
+}
+
 function createCustomLink(data) {
   return new Promise((resolve, reject) => {
     const responseData = createLinkWithRebradly(data);
 
     responseData
       .then(response => response.data)
-      .then(data => resolve(data))
+      .then(data => parseResponseData(data))
+      .then(parsedData => resolve(parsedData))
       .catch(error => reject(error));
   });
 }
