@@ -1,4 +1,5 @@
 const axios = require('axios');
+const Link = require('../models/link');
 
 function createLinkWithRebradly(data) {
   return axios({
@@ -6,7 +7,7 @@ function createLinkWithRebradly(data) {
     url: 'https://api.rebrandly.com/v1/links',
     headers: {
       "Content-Type": "application/json",
-      "apikey": "d933be40ec934d7c90de9721e96dbae5"
+      "apikey": process.env.REBRANDLY_API_KEY,
     },
     data,
   });
@@ -24,6 +25,21 @@ function parseResponseData(resData) {
   return data;
 }
 
+function createAndSaveLink(data) {
+  return new Promise ((resolve, reject) => {
+    const link = new Link(data);
+
+    link.save((err) => {
+      if (err) {
+        console.error(err);
+        reject(err);
+      }
+
+      resolve(link);
+    });
+  });
+}
+
 function createCustomLink(data) {
   return new Promise((resolve, reject) => {
     const responseData = createLinkWithRebradly(data);
@@ -31,7 +47,8 @@ function createCustomLink(data) {
     responseData
       .then(response => response.data)
       .then(data => parseResponseData(data))
-      .then(parsedData => resolve(parsedData))
+      .then(parsedData => createAndSaveLink(parsedData))
+      .then(link => resolve(link))
       .catch(error => reject(error));
   });
 }
