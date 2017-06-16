@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
@@ -6,6 +8,7 @@ const http = require('http');
 const morgan = require('morgan');
 const path = require('path');
 const api = require('./server/routes/api');
+
 const app = express();
 
 dotenv.config();
@@ -16,7 +19,7 @@ mongoose.connect(process.env.MONGODB);
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
+db.once('open', () => {
   console.log(`MongoDB connected at ${process.env.MONGODB}`);
 });
 

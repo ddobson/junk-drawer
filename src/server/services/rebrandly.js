@@ -6,8 +6,8 @@ function createLinkWithRebradly(data) {
     method: 'post',
     url: 'https://api.rebrandly.com/v1/links',
     headers: {
-      "Content-Type": "application/json",
-      "apikey": process.env.REBRANDLY_API_KEY,
+      'Content-Type': 'application/json',
+      apikey: process.env.REBRANDLY_API_KEY,
     },
     data,
   });
@@ -26,12 +26,12 @@ function parseResponseData(resData) {
 }
 
 function createAndSaveLink(data) {
-  return new Promise ((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const link = new Link(data);
 
     link.save((err) => {
       if (err) {
-        console.error(err);
+        console.error(err); // eslint-disable-line no-console
         reject(err);
       }
 
@@ -46,7 +46,7 @@ function createCustomLink(data) {
 
     responseData
       .then(response => response.data)
-      .then(data => parseResponseData(data))
+      .then(resData => parseResponseData(resData))
       .then(parsedData => createAndSaveLink(parsedData))
       .then(link => resolve(link))
       .catch(error => reject(error));
@@ -54,5 +54,5 @@ function createCustomLink(data) {
 }
 
 module.exports = {
-  createCustomLink
+  createCustomLink,
 };
