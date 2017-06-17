@@ -8,6 +8,7 @@ const http = require('http');
 const morgan = require('morgan');
 const path = require('path');
 const api = require('./server/routes/api');
+const auth = require('./server/routes/auth');
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(morgan('combined'));
 app.use('/api', api);
+app.use('/auth', auth);
 app.use(express.static(path.join(__dirname, '../build')));
 
 // ROUTING
