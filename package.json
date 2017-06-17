@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "axios": "^0.16.2",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
+    "jwt-simple": "^0.5.1",
     "mongoose": "^4.10.6",
     "morgan": "^1.8.2",
     "nodemon": "^1.11.0",
