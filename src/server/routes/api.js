@@ -1,5 +1,5 @@
 const express = require('express');
-const rebrandly = require('../services/rebrandly');
+const links = require('../controllers/links');
 
 const router = express.Router();
 
@@ -7,10 +7,6 @@ router.get('/', (req, res) => {
   res.send('API Works!');
 });
 
-router.post('/create-link', (req, res, next) => {
-  rebrandly.createCustomLink(req.body)
-    .then(data => res.json(data))
-    .catch(err => next(err));
-});
+router.post('/create-link', links.createCustomLink);
 
 module.exports = router;
