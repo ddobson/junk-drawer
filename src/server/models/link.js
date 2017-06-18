@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const urlRegex = require('url-regex');
 
 const Schema = mongoose.Schema;
 
@@ -14,6 +15,12 @@ const linkSchema = new Schema({
   originalHost: {
     type: String,
     required: true,
+    validate: {
+      validator(url) {
+        return urlRegex({ strict: true }).test(url);
+      },
+      message: '{VALUE}) is not a valid URL. URLs must be valid and include protocol.',
+    },
   },
   slashtag: {
     type: String,
