@@ -16,6 +16,7 @@ dotenv.config();
 
 // DATABASE
 mongoose.connect(process.env.MONGODB);
+mongoose.Promise = global.Promise;
 
 const db = mongoose.connection;
 
