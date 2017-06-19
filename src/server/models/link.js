@@ -33,6 +33,10 @@ const linkSchema = new Schema({
   title: {
     type: String,
   },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  },
 }, {
   timestamps: true,
 });

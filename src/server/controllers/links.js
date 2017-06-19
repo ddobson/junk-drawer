@@ -8,7 +8,7 @@ function _extractOriginalHost(destination) {
   return `${parsedURL.protocol}//${parsedURL.hostname}`;
 }
 
-function _parseResponseData(resData) {
+function _parseResponseData(resData, user) {
   const data = {
     originalHost: _extractOriginalHost(resData.destination),
     rebrandlyId: resData.id,
@@ -16,6 +16,7 @@ function _parseResponseData(resData) {
     slashtag: resData.slashtag,
     shortUrl: `http://${resData.shortUrl}`,
     title: resData.title,
+    userId: user._id,
   };
 
   return data;
@@ -41,7 +42,7 @@ function createCustomLink(req, res, next) {
 
   responseData
     .then(response => response.data)
-    .then(resData => _parseResponseData(resData))
+    .then(resData => _parseResponseData(resData, req.user))
     .then(parsedData => _createAndSaveLink(parsedData))
     .then(link => res.json(link))
     .catch((err) => {
