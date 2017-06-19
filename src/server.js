@@ -1,5 +1,6 @@
+require('dotenv').config();
+
 const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
 const express = require('express');
 const http = require('http');
 const morgan = require('morgan');
@@ -9,8 +10,6 @@ const api = require('./server/routes/api');
 const auth = require('./server/routes/auth');
 
 const app = express();
-
-dotenv.config();
 
 // DATABASE
 database.connectToDatabase();

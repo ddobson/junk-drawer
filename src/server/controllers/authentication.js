@@ -37,3 +37,7 @@ exports.signup = function (req, res, next) {
     });
   });
 };
+
+exports.signin = function(req, res) {
+  res.send({ token: tokenForUser(req.user) });
+};
