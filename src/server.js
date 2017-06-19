@@ -27,7 +27,7 @@ db.once('open', () => {
 
 // MIDDLEWARE
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('combined'));
 app.use('/api', api);
 app.use('/auth', auth);
