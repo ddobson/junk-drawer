@@ -2,15 +2,15 @@ const parser = require('url-parse');
 const Link = require('../models/link');
 const rebrandly = require('../services/rebrandly');
 
-function extractOriginalHost(destination) {
+function _extractOriginalHost(destination) {
   const parsedURL = parser(destination);
 
   return `${parsedURL.protocol}//${parsedURL.hostname}`;
 }
 
-function parseResponseData(resData) {
+function _parseResponseData(resData) {
   const data = {
-    originalHost: extractOriginalHost(resData.destination),
+    originalHost: _extractOriginalHost(resData.destination),
     rebrandlyId: resData.id,
     destination: resData.destination,
     slashtag: resData.slashtag,
@@ -21,7 +21,7 @@ function parseResponseData(resData) {
   return data;
 }
 
-function createAndSaveLink(data) {
+function _createAndSaveLink(data) {
   return new Promise((resolve, reject) => {
     const link = new Link(data);
 
@@ -36,22 +36,14 @@ function createAndSaveLink(data) {
   });
 }
 
-function handleLinkCreation(data) {
-  return new Promise((resolve, reject) => {
-    const responseData = rebrandly.createRebrandlyLink(data);
-
-    responseData
-      .then(response => response.data)
-      .then(resData => parseResponseData(resData))
-      .then(parsedData => createAndSaveLink(parsedData))
-      .then(link => resolve(link))
-      .catch(error => reject(error));
-  });
-}
-
 function createCustomLink(req, res, next) {
-  handleLinkCreation(req.body)
-    .then(data => res.json(data))
+  const responseData = rebrandly.createRebrandlyLink(req.body);
+
+  responseData
+    .then(response => response.data)
+    .then(resData => _parseResponseData(resData))
+    .then(parsedData => _createAndSaveLink(parsedData))
+    .then(link => res.json(link))
     .catch((err) => {
       if (err.response) {
         const { status, data } = err.response;
@@ -64,4 +56,7 @@ function createCustomLink(req, res, next) {
 
 module.exports = {
   createCustomLink,
+  _extractOriginalHost,
+  _parseResponseData,
+  _createAndSaveLink,
 };
