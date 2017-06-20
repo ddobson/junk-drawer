@@ -27,11 +27,7 @@ function _createAndSaveLink(data) {
     const link = new Link(data);
 
     link.save((err) => {
-      if (err) {
-        console.error(err); // eslint-disable-line no-console
-        reject(err);
-      }
-
+      if (err) { reject(err); }
       resolve(link);
     });
   });
@@ -46,7 +42,7 @@ function create(req, res, next) {
     .then(parsedData => _createAndSaveLink(parsedData))
     .then(link => res.json(link))
     .catch((err) => {
-      if (err.response) {
+      if (err) {
         const { status, data } = err.response;
         res.status(status).json({ error: data.message });
       }
