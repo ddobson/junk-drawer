@@ -5,16 +5,13 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 exports.connectToDatabase = function() {
-  const ENV = process.env.NODE_ENV;
   let MONGO_CONNECTION;
 
-  if (ENV === 'test') {
+  if (process.env.NODE_ENV === 'test') {
     MONGO_CONNECTION = process.env.MONGODB_TEST;
     mongoose.connect(MONGO_CONNECTION);
-  }
-
-  if (ENV === 'development') {
-    MONGO_CONNECTION = process.env.MONGODB_DEVELOPMENT;
+  } else {
+    MONGO_CONNECTION = process.env.MONGODB;
     mongoose.connect(MONGO_CONNECTION);
   }
 
