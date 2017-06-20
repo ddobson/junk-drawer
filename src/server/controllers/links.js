@@ -37,7 +37,7 @@ function _createAndSaveLink(data) {
   });
 }
 
-function createCustomLink(req, res, next) {
+function create(req, res, next) {
   const responseData = rebrandly.createRebrandlyLink(req.body);
 
   responseData
@@ -55,8 +55,16 @@ function createCustomLink(req, res, next) {
     });
 }
 
+function index(req, res, next) {
+  Link.find({ userId: req.user._id }).exec((err, links) => {
+    if (err) { next(err); }
+    res.json({ links });
+  });
+}
+
 module.exports = {
-  createCustomLink,
+  create,
+  index,
   _extractOriginalHost,
   _parseResponseData,
   _createAndSaveLink,

@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
   res.send('API Works!');
 });
 
-router.post('/create-link', requireAuth, links.createCustomLink);
+router.post('/links', requireAuth, links.create);
+router.get('/links', requireAuth, links.index);
 
 module.exports = router;
