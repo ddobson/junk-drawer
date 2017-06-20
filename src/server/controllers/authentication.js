@@ -9,12 +9,10 @@ function tokenForUser(user) {
 }
 
 exports.signup = function (req, res, next) {
-  const email = req.body.email;
-  const password = req.body.password;
-  const passwordConf = req.body.passwordConf;
+  const { email, userName, password, passwordConf } = req.body;
 
-  if (!email || !password || !passwordConf) {
-    res.status(422).json({ error: 'You must provide an email, password and password confirmation.' });
+  if (!email || !password || !passwordConf || !userName) {
+    res.status(422).json({ error: 'You must provide an email, username, password and password confirmation.' });
   }
 
   if (password !== passwordConf) {
@@ -28,7 +26,7 @@ exports.signup = function (req, res, next) {
       return res.status(422).json({ error: 'Email is already in user' });
     }
 
-    const newUser = new User({ email: email, password: password }); // eslint-disable-line object-shorthand,max-len
+    const newUser = new User({ email: email, password: password, userName: userName }); // eslint-disable-line object-shorthand,max-len
 
     newUser.save(newUser, (err) => {
       if (err) return next(err);
