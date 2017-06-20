@@ -1,6 +1,8 @@
 const axios = require('axios');
 
-exports.createRebrandlyLink = function(data) {
+exports.createRebrandlyLink = function(data, user) {
+  data.slashtag = `${user.userName}-${data.slashtag}`; // eslint-disable-line no-param-reassign
+
   return axios({
     method: 'post',
     url: 'https://api.rebrandly.com/v1/links',

@@ -38,7 +38,7 @@ function _createAndSaveLink(data) {
 }
 
 function create(req, res, next) {
-  const responseData = rebrandly.createRebrandlyLink(req.body);
+  const responseData = rebrandly.createRebrandlyLink(req.body, req.user);
 
   responseData
     .then(response => response.data)
