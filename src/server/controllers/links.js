@@ -68,10 +68,23 @@ function destroy(req, res, next) {
     .catch(err => next(err));
 }
 
+function update(req, res) {
+  // TODO
+  // Find the link and ensure that it exists
+  // Reconcile the link and the new data (ensure data for rebrandly ajax is in order)
+  // Make API call to rebrandly
+  // Update local copy
+  // Send response to client
+  // Catch errors
+
+  res.send(req.body); // Echo req body for now
+}
+
 module.exports = {
   create,
   index,
   destroy,
+  update,
   _extractOriginalHost,
   _parseResponseData,
   _createAndSaveLink,
