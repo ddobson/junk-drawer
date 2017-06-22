@@ -15,5 +15,6 @@ router.get('/', (req, res) => {
 
 router.post('/links', requireAuth, links.create);
 router.get('/links', requireAuth, links.index);
+router.delete('/links/:id', requireAuth, links.destroy);
 
 module.exports = router;

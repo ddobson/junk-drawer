@@ -13,3 +13,13 @@ exports.createRebrandlyLink = function(data, user) {
     data,
   });
 };
+
+exports.destroyRebrandlyLink = function(link) {
+  return axios({
+    method: 'delete',
+    url: `https://api.rebrandly.com/v1/links/${link.rebrandlyId}`,
+    headers: {
+      apikey: process.env.REBRANDLY_API_KEY,
+    },
+  });
+};

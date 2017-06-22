@@ -52,15 +52,26 @@ function create(req, res, next) {
 }
 
 function index(req, res, next) {
-  Link.find({ userId: req.user._id }).exec((err, links) => {
+  Link.find({ userId: req.user._id }, (err, links) => {
     if (err) { next(err); }
     res.json({ links });
   });
 }
 
+function destroy(req, res, next) {
+  const { id } = req.params;
+
+  Link.findById(id)
+    .then(link => rebrandly.destroyRebrandlyLink(link))
+    .then(() => Link.findByIdAndRemove(id))
+    .then(() => res.sendStatus(204))
+    .catch(err => next(err));
+}
+
 module.exports = {
   create,
   index,
+  destroy,
   _extractOriginalHost,
   _parseResponseData,
   _createAndSaveLink,
