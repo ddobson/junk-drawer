@@ -24,16 +24,25 @@ function _parseResponseData(resData, user) {
 
 function _createAndSaveLink(data) {
   return new Promise((resolve, reject) => {
-    const link = new Link(data);
+    const newLink = new Link(data);
 
-    link.save((err) => {
+    newLink.save((err, link) => {
       if (err) { reject(err); }
       resolve(link);
     });
   });
 }
 
-function create(req, res, next) {
+function _updateAndSaveLink(id, data) {
+  return new Promise((resolve, reject) => {
+    Link.findByIdAndUpdate(id, data, (err, link) => {
+      if (err) { reject(err); }
+      resolve(link);
+    });
+  });
+}
+
+function create(req, res) {
   const responseData = rebrandly.createRebrandlyLink(req.body, req.user);
 
   responseData
@@ -46,8 +55,6 @@ function create(req, res, next) {
         const { status, data } = err.response;
         res.status(status).json({ error: data.message });
       }
-
-      next(err);
     });
 }
 
@@ -69,15 +76,20 @@ function destroy(req, res, next) {
 }
 
 function update(req, res) {
-  // TODO
-  // Find the link and ensure that it exists
-  // Reconcile the link and the new data (ensure data for rebrandly ajax is in order)
-  // Make API call to rebrandly
-  // Update local copy
-  // Send response to client
-  // Catch errors
+  const { id } = req.params;
 
-  res.send(req.body); // Echo req body for now
+  Link.findById(id)
+    .then(link => rebrandly.updateRebrandlyLink(req.body, link, req.user))
+    .then(response => response.data)
+    .then(resData => _parseResponseData(resData, req.user))
+    .then(parsedData => _updateAndSaveLink(id, parsedData))
+    .then(link => res.json(link))
+    .catch((err) => {
+      if (err.response) {
+        const { status, data } = err.response;
+        res.status(status).json({ error: data.message });
+      }
+    });
 }
 
 module.exports = {
