@@ -42,6 +42,32 @@ function _updateAndSaveLink(id, data) {
   });
 }
 
+function _handleLinkErrors(err, res) {
+  if (err.response) {
+    const error = err.response.data;
+
+    if (err.response.status === 403) {
+      return res.status(422).json({ error });
+    }
+
+    if (err.response.status === 404) {
+      return res.status(404).json({ error });
+    }
+
+    return res.status(500).json({ error });
+  }
+
+  return res.status(500).json({ error: err.message });
+}
+
+function index(req, res) {
+  Link.find({ userId: req.user._id }, (err, links) => {
+    if (err) { _handleLinkErrors(err, res); }
+
+    res.json({ links });
+  });
+}
+
 function create(req, res) {
   const responseData = rebrandly.createRebrandlyLink(req.body, req.user);
 
@@ -49,30 +75,18 @@ function create(req, res) {
     .then(response => response.data)
     .then(resData => _parseResponseData(resData, req.user))
     .then(parsedData => _createAndSaveLink(parsedData))
-    .then(link => res.json(link))
-    .catch((err) => {
-      if (err) {
-        const { status, data } = err.response;
-        res.status(status).json({ error: data.message });
-      }
-    });
+    .then(link => res.status(201).json(link))
+    .catch(err => _handleLinkErrors(err, res));
 }
 
-function index(req, res, next) {
-  Link.find({ userId: req.user._id }, (err, links) => {
-    if (err) { next(err); }
-    res.json({ links });
-  });
-}
-
-function destroy(req, res, next) {
+function destroy(req, res) {
   const { id } = req.params;
 
   Link.findById(id)
     .then(link => rebrandly.destroyRebrandlyLink(link))
     .then(() => Link.findByIdAndRemove(id))
     .then(() => res.sendStatus(204))
-    .catch(err => next(err));
+    .catch(err => _handleLinkErrors(err, res));
 }
 
 function update(req, res) {
@@ -84,20 +98,16 @@ function update(req, res) {
     .then(resData => _parseResponseData(resData, req.user))
     .then(parsedData => _updateAndSaveLink(id, parsedData))
     .then(link => res.json(link))
-    .catch((err) => {
-      if (err.response) {
-        const { status, data } = err.response;
-        res.status(status).json({ error: data.message });
-      }
-    });
+    .catch(err => _handleLinkErrors(err, res));
 }
 
 module.exports = {
-  create,
   index,
+  create,
   destroy,
   update,
   _extractOriginalHost,
   _parseResponseData,
   _createAndSaveLink,
+  _handleLinkErrors,
 };
