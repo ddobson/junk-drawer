@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import App from './client/containers/App';
+import Navigation from './client/containers/Navigation';
 import configureStore from './client/config/configureStore';
 import getInitialState from './client/config/getInitialState';
 import registerServiceWorker from './client/config/registerServiceWorker';
@@ -12,7 +14,14 @@ const store = configureStore(getInitialState());
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <div>
+        <Navigation />
+        <Switch>
+          <Route exact path="/" component={App} />
+        </Switch>
+      </div>
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root'),
 );
