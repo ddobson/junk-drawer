@@ -17,7 +17,8 @@ module.exports = {
         "no-shadow": 0,
         "no-underscore-dangle": 0,
         "space-before-function-paren": 0,
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/prefer-stateless-function": 1,
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+        "react/require-default-props": 0,
     }
 };
