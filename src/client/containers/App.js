@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import '../styles/App.scss';
 
 class App extends Component {
@@ -12,8 +14,14 @@ class App extends Component {
   }
 }
 
+App.propTypes = {
+  auth: PropTypes.shape({
+    isAuthenticated: PropTypes.bool,
+  }),
+};
+
 const mapStateToProps = state => (
-  { user: state.user }
+  { auth: state.auth }
 );
 
 export default connect(mapStateToProps)(App);
