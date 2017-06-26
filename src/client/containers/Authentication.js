@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import SignInForm from '../components/SignInForm';
+import SignInForm from '../components/auth/SignInForm';
+import SignUpForm from '../components/auth/SignUpForm';
 import validateSignIn from '../services/auth/validations';
 import { signInUser } from '../actions/auth';
 import '../styles/Authentication.scss';
@@ -31,6 +32,8 @@ class Authentication extends Component {
     switch (pathname) {
       case '/signin':
         return <SignInForm onSignInSubmit={this.props.onSignInSubmit} />;
+      case '/signup':
+        return <SignUpForm onSignUpSubmit={this.props.onSignUpSubmit} />;
       default:
         return null;
     }
@@ -47,6 +50,7 @@ class Authentication extends Component {
 
 Authentication.propTypes = {
   onSignInSubmit: PropTypes.func,
+  onSignUpSubmit: PropTypes.func,
   auth: PropTypes.shape({
     isAuthenticated: PropTypes.bool,
   }),
@@ -66,6 +70,9 @@ const mapDispatchToProps = dispatch => ({
   onSignInSubmit(values) {
     validateSignIn(values);
     dispatch(signInUser(values));
+  },
+  onSignUpSubmit(values) {
+    console.log(values);
   },
 });
 

@@ -25,6 +25,7 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" component={App} />
           <Route path="/signin" component={Authentication} />
+          <Route path="/signup" component={Authentication} />
         </Switch>
       </div>
     </BrowserRouter>

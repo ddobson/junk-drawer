@@ -1,17 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-
-const renderField = ({ input, label, id, type, meta: { touched, error } }) => (
-  <div className="field">
-    <label htmlFor={id} className="label">
-      {label}
-      <span className="required"> *</span>
-    </label>
-    <input {...input} id={id} className={error ? 'input is-danger' : 'input'} type={type} />
-    {touched && error && <p className="help is-danger">{error}</p>}
-  </div>
-);
+import FormField from './FormField';
 
 const SignInForm = function(props) {
   const { handleSubmit, reset } = props;
@@ -29,14 +19,14 @@ const SignInForm = function(props) {
             <Field
               id="email-field"
               name="email"
-              component={renderField}
+              component={FormField}
               type="text"
               label="Email"
             />
             <Field
               id="pass-field"
               name="password"
-              component={renderField}
+              component={FormField}
               type="password"
               label="Password"
             />
@@ -53,15 +43,6 @@ const SignInForm = function(props) {
       </div>
     </section>
   );
-};
-
-renderField.propTypes = {
-  // Ignore the shape of props coming from redux-form
-  meta: PropTypes.object, // eslint-disable-line
-  input: PropTypes.object, // eslint-disable-line
-  id: PropTypes.string,
-  type: PropTypes.string,
-  label: PropTypes.string,
 };
 
 SignInForm.propTypes = {
