@@ -7,11 +7,15 @@ import App from './client/containers/App';
 import Navigation from './client/containers/Navigation';
 import Authentication from './client/containers/Authentication';
 import configureStore from './client/config/configureStore';
-import getInitialState from './client/config/getInitialState';
+import { loadSerializedState, saveState } from './client/config/localStorage';
 import registerServiceWorker from './client/config/registerServiceWorker';
 import './client/styles/index.scss';
 
-const store = configureStore(getInitialState());
+const store = configureStore(loadSerializedState());
+
+store.subscribe(() => {
+  saveState(store.getState());
+});
 
 ReactDOM.render(
   <Provider store={store}>
