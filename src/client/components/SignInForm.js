@@ -4,7 +4,10 @@ import { Field, reduxForm } from 'redux-form';
 
 const renderField = ({ input, label, id, type, meta: { touched, error } }) => (
   <div className="field">
-    <label htmlFor={id} className="label">{label}</label>
+    <label htmlFor={id} className="label">
+      {label}
+      <span className="required"> *</span>
+    </label>
     <input {...input} id={id} className={error ? 'input is-danger' : 'input'} type={type} />
     {touched && error && <p className="help is-danger">{error}</p>}
   </div>
@@ -42,7 +45,7 @@ const SignInForm = function(props) {
                 <button className="button" type="submit">Sign In</button>
               </div>
               <div className="control">
-                <button className="button is-danger" type="submit" onClick={reset}>Cancel</button>
+                <button className="button is-danger" type="button" onClick={reset}>Cancel</button>
               </div>
             </div>
           </form>
