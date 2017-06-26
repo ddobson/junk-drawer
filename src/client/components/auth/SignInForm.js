@@ -4,7 +4,8 @@ import { Field, reduxForm } from 'redux-form';
 import FormField from './FormField';
 
 const SignInForm = function(props) {
-  const { handleSubmit, reset } = props;
+  const { handleSubmit, reset, auth } = props;
+  const btnStyle = auth.isLoading ? 'button is-loading' : 'button';
 
   return (
     <section className="section">
@@ -32,7 +33,7 @@ const SignInForm = function(props) {
             />
             <div className="field is-grouped">
               <div className="control">
-                <button className="button" type="submit">Sign In</button>
+                <button className={btnStyle} type="submit">Sign In</button>
               </div>
               <div className="control">
                 <button className="button is-danger" type="button" onClick={reset}>Cancel</button>
@@ -49,6 +50,9 @@ SignInForm.propTypes = {
   handleSubmit: PropTypes.func,
   onSignInSubmit: PropTypes.func,
   reset: PropTypes.func,
+  auth: PropTypes.shape({
+    isAuthenticated: PropTypes.bool,
+  }),
 };
 
 export default reduxForm({ form: 'signin' })(SignInForm);

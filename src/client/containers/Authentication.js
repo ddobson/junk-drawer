@@ -28,12 +28,13 @@ class Authentication extends Component {
 
   renderForm() {
     const { pathname } = this.props.history.location;
+    const { auth, onSignInSubmit, onSignUpSubmit } = this.props;
 
     switch (pathname) {
       case '/signin':
-        return <SignInForm onSignInSubmit={this.props.onSignInSubmit} />;
+        return <SignInForm auth={auth} onSignInSubmit={onSignInSubmit} />;
       case '/signup':
-        return <SignUpForm onSignUpSubmit={this.props.onSignUpSubmit} />;
+        return <SignUpForm auth={auth} onSignUpSubmit={onSignUpSubmit} />;
       default:
         return null;
     }
