@@ -2,6 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 
+const renderField = ({ input, label, id, type, meta: { touched, error } }) => (
+  <div className="field">
+    <label htmlFor={id} className="label">{label}</label>
+    <input {...input} id={id} className={error ? 'input is-danger' : 'input'} type={type} />
+    {touched && error && <p className="help is-danger">{error}</p>}
+  </div>
+);
+
 const SignInForm = function(props) {
   const { handleSubmit, reset } = props;
 
@@ -15,26 +23,20 @@ const SignInForm = function(props) {
       <div className="columns">
         <div className="column is-offset-one-quarter is-half-tablet">
           <form onSubmit={handleSubmit(props.onSignInSubmit)}>
-            <div className="field">
-              <label htmlFor="email-field" className="label">Email</label>
-              <Field
-                id="email-field"
-                name="email"
-                className="input"
-                component="input"
-                type="text"
-              />
-            </div>
-            <div className="field">
-              <label htmlFor="pass-field" className="label">Password</label>
-              <Field
-                id="pass-field"
-                name="password"
-                className="input"
-                component="input"
-                type="password"
-              />
-            </div>
+            <Field
+              id="email-field"
+              name="email"
+              component={renderField}
+              type="text"
+              label="Email"
+            />
+            <Field
+              id="pass-field"
+              name="password"
+              component={renderField}
+              type="password"
+              label="Password"
+            />
             <div className="field is-grouped">
               <div className="control">
                 <button className="button" type="submit">Sign In</button>
@@ -48,6 +50,15 @@ const SignInForm = function(props) {
       </div>
     </section>
   );
+};
+
+renderField.propTypes = {
+  // Ignore the shape of props coming from redux-form
+  meta: PropTypes.object, // eslint-disable-line
+  input: PropTypes.object, // eslint-disable-line
+  id: PropTypes.string,
+  type: PropTypes.string,
+  label: PropTypes.string,
 };
 
 SignInForm.propTypes = {

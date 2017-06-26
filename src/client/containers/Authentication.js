@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import SignInForm from '../components/SignInForm';
+import validateSignIn from '../services/auth/validations';
 import { signInUser } from '../actions/auth';
 import '../styles/Authentication.scss';
 
@@ -63,6 +64,7 @@ const mapStateToProps = state => (
 
 const mapDispatchToProps = dispatch => ({
   onSignInSubmit(values) {
+    validateSignIn(values);
     dispatch(signInUser(values));
   },
 });
