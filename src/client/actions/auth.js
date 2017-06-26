@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const AUTH_LOADING = 'AUTH_LOADING';
-export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const AUTH_STATUS = 'AUTH_STATUS';
 export const AUTH_ERROR = 'AUTH_ERROR';
 
 export function authIsLoading(bool) {
@@ -11,9 +11,9 @@ export function authIsLoading(bool) {
   };
 }
 
-export function authSuccess(bool) {
+export function authStatus(bool) {
   return {
-    type: AUTH_SUCCESS,
+    type: AUTH_STATUS,
     payload: bool,
   };
 }
@@ -43,7 +43,7 @@ export function signInUser(formData) {
       .then(response => response.data)
       .then((data) => {
         localStorage.setItem('token', data.token);
-        dispatch(authSuccess(true));
+        dispatch(authStatus(true));
       })
       .catch((error) => {
         dispatch(authError({ hasErrored: true, error: error.response.data }));
