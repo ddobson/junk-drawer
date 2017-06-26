@@ -24,7 +24,9 @@ export function loadSerializedState() {
 
 export function saveState(state) {
   try {
-    const serializedState = JSON.stringify(state);
+    const copy = { ...state };
+    delete copy.form;
+    const serializedState = JSON.stringify(copy);
     localStorage.setItem('state', serializedState);
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
