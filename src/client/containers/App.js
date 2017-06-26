@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>App Component</h1>
+        <h1>{`App Component ${this.props.auth.isAuthenticated ? 'Auth\'d' : 'Not Auth\'d'}`}</h1>
       </div>
     );
   }

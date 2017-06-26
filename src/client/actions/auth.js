@@ -52,3 +52,10 @@ export function signInUser(formData) {
     dispatch(authIsLoading(false));
   };
 }
+
+export function signOutUser() {
+  return (dispatch) => {
+    dispatch(authStatus(false));
+    localStorage.removeItem('token');
+  };
+}

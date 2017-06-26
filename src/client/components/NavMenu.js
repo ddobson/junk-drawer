@@ -7,7 +7,7 @@ const NavMenu = (props) => {
     return (
       <div>
         <div className="nav-right nav-menu">
-          <Link className="nav-item is-tab" to="/sign-out">Sign Out</Link>
+          <Link className="nav-item is-tab" to="/" onClick={props.signOut}>Sign Out</Link>
         </div>
       </div>
     );
@@ -17,6 +17,7 @@ const NavMenu = (props) => {
 };
 
 NavMenu.propTypes = {
+  signOut: PropTypes.func,
   isAuthenticated: PropTypes.bool,
 };
 
