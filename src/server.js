@@ -5,6 +5,7 @@ const express = require('express');
 const http = require('http');
 const morgan = require('morgan');
 const path = require('path');
+const cors = require('cors');
 const database = require('./server/config/database');
 const api = require('./server/routes/api');
 const auth = require('./server/routes/auth');
@@ -15,9 +16,10 @@ const app = express();
 database.connectToDatabase();
 
 // MIDDLEWARE
+app.use(morgan('combined'));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan('combined'));
 app.use('/api', api);
 app.use('/auth', auth);
 app.use(express.static(path.join(__dirname, '../build')));
