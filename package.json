@@ -24,6 +24,7 @@
     "react-router-dom": "^4.1.1",
     "redux": "^3.6.0",
     "redux-form": "^6.8.0",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "url-parse": "^1.1.9",
     "url-regex": "^4.1.1"
