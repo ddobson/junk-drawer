@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
 import FormField from './FormField';
 
 const SignInForm = function(props) {
@@ -10,9 +11,13 @@ const SignInForm = function(props) {
   return (
     <section className="section">
       <div className="container is-fluid">
-        <h1 className="title">
-          Sign In
-        </h1>
+        <div className="cta-container">
+          <h1 className="title">Sign In</h1>
+          <span>
+            {'Don\'t have an account? '}
+            <Link to="/signup">Sign up!</Link>
+          </span>
+        </div>
       </div>
       <div className="columns">
         <div className="column is-offset-one-quarter is-half-tablet">

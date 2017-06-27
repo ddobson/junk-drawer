@@ -13,7 +13,14 @@ const NavMenu = (props) => {
     );
   }
 
-  return null;
+  return (
+    <div>
+      <div className="nav-right nav-menu">
+        <Link className="nav-item is-tab" to="/signup">Sign Up</Link>
+        <Link className="nav-item is-tab" to="/signin">Sign In</Link>
+      </div>
+    </div>
+  );
 };
 
 NavMenu.propTypes = {
