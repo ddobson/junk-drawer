@@ -53,6 +53,31 @@ export function signInUser(formData) {
   };
 }
 
+export function signUpUser(formData) {
+  return async (dispatch) => {
+    try {
+      dispatch(authError({ hasErrored: false, error: '' })); // Sanitize auth error state
+      dispatch(authIsLoading(true)); // Set app to loading
+
+      const signUpResponse = await axios({
+        url: 'http://localhost:3001/auth/signup',
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: formData,
+      });
+
+      localStorage.setItem('token', signUpResponse.data.token);
+      dispatch(authStatus(true));
+    } catch (error) {
+      dispatch(authError({ hasErrored: true, error: error.response.data }));
+    } finally {
+      dispatch(authIsLoading(false));
+    }
+  };
+}
+
 export function signOutUser() {
   return (dispatch) => {
     dispatch(authStatus(false));

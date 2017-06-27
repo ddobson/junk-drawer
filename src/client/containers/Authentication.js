@@ -5,8 +5,8 @@ import { withRouter } from 'react-router-dom';
 
 import SignInForm from '../components/auth/SignInForm';
 import SignUpForm from '../components/auth/SignUpForm';
-import validateSignIn from '../services/auth/validations';
-import { signInUser } from '../actions/auth';
+import { validateSignIn, validateSignUp } from '../services/auth/validations';
+import { signInUser, signUpUser } from '../actions/auth';
 import '../styles/Authentication.scss';
 
 class Authentication extends Component {
@@ -73,7 +73,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(signInUser(values));
   },
   onSignUpSubmit(values) {
-    console.log(values);
+    validateSignUp(values);
+    dispatch(signUpUser(values));
   },
 });
 
