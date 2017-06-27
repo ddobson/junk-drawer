@@ -1,18 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import '../styles/App.scss';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <h1>{`App Component ${this.props.auth.isAuthenticated ? 'Auth\'d' : 'Not Auth\'d'}`}</h1>
-      </div>
-    );
-  }
-}
+const App = props => (
+  <div className="App">
+    <h1>{`App Component ${props.auth.isAuthenticated ? 'Auth\'d' : 'Not Auth\'d'}`}</h1>
+  </div>
+);
 
 App.propTypes = {
   auth: PropTypes.shape({

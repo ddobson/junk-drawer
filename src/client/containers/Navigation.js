@@ -1,27 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { signOutUser } from '../actions/auth';
 import NavMenu from '../components/NavMenu';
 
-class Navigation extends Component {
-  render() {
-    const { isAuthenticated } = this.props.auth;
-    const { signOut } = this.props;
+const Navigation = (props) => {
+  const { isAuthenticated } = props.auth;
+  const { signOut } = props;
 
-    return (
-      <nav className="nav has-shadow">
-        <div className="nav-left">
-          <div className="nav-item">
-            <h3>Junk Drawer</h3>
-          </div>
+  return (
+    <nav className="nav has-shadow">
+      <div className="nav-left">
+        <div className="nav-item">
+          <h3>Junk Drawer</h3>
         </div>
-        <NavMenu isAuthenticated={isAuthenticated} signOut={signOut} />
-      </nav>
-    );
-  }
-}
+      </div>
+      <NavMenu isAuthenticated={isAuthenticated} signOut={signOut} />
+    </nav>
+  );
+};
 
 Navigation.propTypes = {
   signOut: PropTypes.func,
