@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
-import FormField from './FormField';
+
+import Button from '../ui/Button';
+import FormField from '../ui/FormField';
 
 const SignInForm = function(props) {
-  const { handleSubmit, reset, auth } = props;
-  const btnStyle = auth.isLoading ? 'button is-loading' : 'button';
+  const { auth, handleSubmit, reset } = props;
 
   return (
     <section className="section">
@@ -28,6 +29,7 @@ const SignInForm = function(props) {
               component={FormField}
               type="text"
               label="Email"
+              required
             />
             <Field
               id="pass-field"
@@ -35,13 +37,14 @@ const SignInForm = function(props) {
               component={FormField}
               type="password"
               label="Password"
+              required
             />
             <div className="field is-grouped">
               <div className="control">
-                <button className={btnStyle} type="submit">Sign In</button>
+                <Button type="submit" isLoading={auth.isLoading}>Sign In</Button>
               </div>
               <div className="control">
-                <button className="button is-danger" type="button" onClick={reset}>Cancel</button>
+                <Button isDanger type="button" onClick={reset}>Cancel</Button>
               </div>
             </div>
           </form>
