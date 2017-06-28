@@ -22,7 +22,7 @@ class Authentication extends Component {
     const { push } = this.props.history;
 
     if (!currentlyAuthenticated && willBeAuthenticated) {
-      push('/');
+      push('/dashboard');
     }
   }
 
