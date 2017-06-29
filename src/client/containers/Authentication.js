@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import SignInForm from '../components/auth/SignInForm';
 import SignUpForm from '../components/auth/SignUpForm';
 import { validateSignIn, validateSignUp } from '../services/auth/validations';
-import { signInUser, signUpUser } from '../actions/auth';
+import { signInUser, signUpUser, authError } from '../actions/auth';
 import '../styles/Authentication.scss';
 
 class Authentication extends Component {
@@ -41,13 +41,25 @@ class Authentication extends Component {
 
   renderForm() {
     const { pathname } = this.props.history.location;
-    const { auth, onSignInSubmit, onSignUpSubmit } = this.props;
+    const { auth, onSignInSubmit, onSignUpSubmit, clearAuthErrors } = this.props;
 
     switch (pathname) {
       case '/signin':
-        return <SignInForm auth={auth} onSignInSubmit={onSignInSubmit} />;
+        return (
+          <SignInForm
+            auth={auth}
+            onSignInSubmit={onSignInSubmit}
+            clearAuthErrors={clearAuthErrors}
+          />
+        );
       case '/signup':
-        return <SignUpForm auth={auth} onSignUpSubmit={onSignUpSubmit} />;
+        return (
+          <SignUpForm
+            auth={auth}
+            onSignUpSubmit={onSignUpSubmit}
+            clearAuthErrors={clearAuthErrors}
+          />
+        );
       default:
         return null;
     }
@@ -64,6 +76,7 @@ class Authentication extends Component {
 }
 
 Authentication.propTypes = {
+  clearAuthErrors: PropTypes.func,
   onSignInSubmit: PropTypes.func,
   onSignUpSubmit: PropTypes.func,
   auth: PropTypes.shape({
@@ -91,6 +104,9 @@ const mapDispatchToProps = dispatch => ({
   onSignUpSubmit(values) {
     validateSignUp(values);
     dispatch(signUpUser(values));
+  },
+  clearAuthErrors() {
+    dispatch(authError({ hasErrored: false, error: '' }));
   },
 });
 
