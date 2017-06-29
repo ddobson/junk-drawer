@@ -13,6 +13,7 @@ class Authentication extends Component {
   constructor(props) {
     super(props);
 
+    this.renderErrorNotification = this.renderErrorNotification.bind(this);
     this.renderForm = this.renderForm.bind(this);
   }
 
@@ -24,6 +25,18 @@ class Authentication extends Component {
     if (!currentlyAuthenticated && willBeAuthenticated) {
       push('/dashboard');
     }
+  }
+
+  renderErrorNotification() {
+    if (this.props.auth.hasErrored) {
+      return (
+        <div className="notification is-danger">
+          {this.props.auth.error}
+        </div>
+      );
+    }
+
+    return null;
   }
 
   renderForm() {
@@ -43,6 +56,7 @@ class Authentication extends Component {
   render() {
     return (
       <div>
+        { this.renderErrorNotification() }
         { this.renderForm() }
       </div>
     );
@@ -53,6 +67,8 @@ Authentication.propTypes = {
   onSignInSubmit: PropTypes.func,
   onSignUpSubmit: PropTypes.func,
   auth: PropTypes.shape({
+    error: PropTypes.string,
+    hasErrored: PropTypes.bool,
     isAuthenticated: PropTypes.bool,
   }),
   history: PropTypes.shape({
@@ -68,9 +84,9 @@ const mapStateToProps = state => (
 );
 
 const mapDispatchToProps = dispatch => ({
-  onSignInSubmit(values) {
+  onSignInSubmit(values, hasErrored) {
     validateSignIn(values);
-    dispatch(signInUser(values));
+    dispatch(signInUser(values, hasErrored));
   },
   onSignUpSubmit(values) {
     validateSignUp(values);

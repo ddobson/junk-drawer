@@ -22,7 +22,7 @@ const SignInForm = function(props) {
       </div>
       <div className="columns">
         <div className="column is-offset-one-quarter is-half-tablet">
-          <form onSubmit={handleSubmit(props.onSignInSubmit)}>
+          <form onSubmit={handleSubmit(values => props.onSignInSubmit(values, auth.hasErrored))}>
             <Field
               id="email-field"
               name="email"

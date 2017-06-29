@@ -26,10 +26,9 @@ export function authError(error) {
   };
 }
 
-export function signInUser(formData) {
+export function signInUser(formData, previousError) {
   return async (dispatch) => {
     try {
-      dispatch(authError({ hasErrored: false, error: '' })); // Sanitize auth error state
       dispatch(authIsLoading(true)); // Set app to loading
 
       const signInResponse = await axios({
@@ -43,6 +42,11 @@ export function signInUser(formData) {
 
       localStorage.setItem('token', signInResponse.data.token);
       dispatch(authStatus(true));
+
+      // If an error occured prior to successful auth, sanitize the error state
+      if (previousError) {
+        dispatch(authError({ hasErrored: false, error: '' }));
+      }
     } catch (error) {
       dispatch(authError({ hasErrored: true, error: error.response.data }));
     } finally {
@@ -51,10 +55,9 @@ export function signInUser(formData) {
   };
 }
 
-export function signUpUser(formData) {
+export function signUpUser(formData, previousError) {
   return async (dispatch) => {
     try {
-      dispatch(authError({ hasErrored: false, error: '' })); // Sanitize auth error state
       dispatch(authIsLoading(true)); // Set app to loading
 
       const signUpResponse = await axios({
@@ -68,8 +71,13 @@ export function signUpUser(formData) {
 
       localStorage.setItem('token', signUpResponse.data.token);
       dispatch(authStatus(true));
+
+      // If an error occured prior to successful auth, sanitize the error state
+      if (previousError) {
+        dispatch(authError({ hasErrored: false, error: '' }));
+      }
     } catch (error) {
-      dispatch(authError({ hasErrored: true, error: error.response.data }));
+      dispatch(authError({ hasErrored: true, error: error.response.data.error }));
     } finally {
       dispatch(authIsLoading(false));
     }
