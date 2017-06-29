@@ -4,7 +4,17 @@ import {
   LINKS_FETCH_DATA_SUCCESS,
 } from '../actions/links';
 
-export default function(state = {}, action) {
+export function links(state = {}, action) {
+  switch (action.type) {
+    case LINKS_FETCH_DATA_SUCCESS: {
+      return { ...state, ...action.payload };
+    }
+    default:
+      return state;
+  }
+}
+
+export function linksMeta(state = {}, action) {
   switch (action.type) {
     case LINKS_HAS_ERRORED: {
       const { hasErrored, error } = action.payload;
@@ -12,9 +22,6 @@ export default function(state = {}, action) {
     }
     case LINKS_IS_LOADING: {
       return { ...state, isLoading: action.payload };
-    }
-    case LINKS_FETCH_DATA_SUCCESS: {
-      return { ...state, data: action.payload };
     }
     default:
       return state;

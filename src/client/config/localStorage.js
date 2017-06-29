@@ -6,12 +6,12 @@ export function getInitialState() {
       hasErrored: false,
       error: '',
     },
-    links: {
-      data: [],
+    linksMeta: {
       isLoading: false,
       hasErrored: false,
       error: '',
     },
+    links: {},
   };
 }
 

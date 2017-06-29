@@ -1,4 +1,5 @@
 import axios from 'axios';
+import keyBy from 'lodash/keyBy';
 import apiOrigin from '../config/apiOrigin';
 
 export const LINKS_HAS_ERRORED = 'LINKS_HAS_ERRORED';
@@ -43,11 +44,15 @@ export function linksFetchData() {
         },
       });
 
-      const links = linksResponse.data.links;
+      const links = keyBy(linksResponse.data.links, '_id');
 
       dispatch(linksFetchDataSuccess(links));
     } catch (error) {
-      dispatch(linksHasErrored({ hasErrored: true, error: error.response.data }));
+      if (error.response) {
+        dispatch(linksHasErrored({ hasErrored: true, error: error.response.data }));
+      } else {
+        dispatch(linksHasErrored({ hasErrored: true, error: 'Uh oh, something went wrong!' }));
+      }
     } finally {
       dispatch(linksIsLoading(false));
     }
