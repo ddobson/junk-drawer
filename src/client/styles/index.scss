@@ -1,5 +1,24 @@
 @import '~bulma/bulma';
 
+// Shared styles below
 .required {
   color: #ff3860;
+}
+
+.fade-appear {
+  opacity: 0.01;
+
+  &.fade-appear-active {
+    opacity: 1;
+    transition: opacity .5s ease-in;
+  }
+}
+
+.fade-leave {
+  opacity: 1;
+
+  &.fade-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+  }
 }

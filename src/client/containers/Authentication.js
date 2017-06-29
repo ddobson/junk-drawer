@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { CSSTransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -30,9 +31,16 @@ class Authentication extends Component {
   renderErrorNotification() {
     if (this.props.auth.hasErrored) {
       return (
-        <div className="notification is-danger">
-          {this.props.auth.error}
-        </div>
+        <CSSTransitionGroup
+          transitionName="fade"
+          transitionAppear
+          transitionAppearTimeout={500}
+        >
+          <div className="notification is-danger">
+            <button className="delete" onClick={this.props.clearAuthErrors} />
+            {this.props.auth.error}
+          </div>
+        </CSSTransitionGroup>
       );
     }
 
@@ -98,10 +106,12 @@ const mapStateToProps = state => (
 
 const mapDispatchToProps = dispatch => ({
   onSignInSubmit(values, hasErrored) {
+    dispatch(authError({ hasErrored: false, error: '' }));
     validateSignIn(values);
     dispatch(signInUser(values, hasErrored));
   },
   onSignUpSubmit(values) {
+    dispatch(authError({ hasErrored: false, error: '' }));
     validateSignUp(values);
     dispatch(signUpUser(values));
   },
