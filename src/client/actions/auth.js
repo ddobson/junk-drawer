@@ -1,4 +1,5 @@
 import axios from 'axios';
+import apiOrigin from '../config/apiOrigin';
 
 export const AUTH_LOADING = 'AUTH_LOADING';
 export const AUTH_STATUS = 'AUTH_STATUS';
@@ -32,7 +33,7 @@ export function signInUser(formData) {
       dispatch(authIsLoading(true)); // Set app to loading
 
       const signInResponse = await axios({
-        url: 'http://localhost:3001/auth/signin',
+        url: `${apiOrigin[process.env.NODE_ENV]}/auth/signin`,
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +58,7 @@ export function signUpUser(formData) {
       dispatch(authIsLoading(true)); // Set app to loading
 
       const signUpResponse = await axios({
-        url: 'http://localhost:3001/auth/signup',
+        url: `${apiOrigin[process.env.NODE_ENV]}/auth/signup`,
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
