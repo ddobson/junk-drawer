@@ -4,7 +4,14 @@ import {
   AUTH_ERROR,
 } from '../actions/auth';
 
-export default function auth(state = {}, action) {
+const initialState = {
+  isAuthenticated: false,
+  isLoading: false,
+  hasErrored: false,
+  error: '',
+};
+
+export default function auth(state = initialState, action) {
   switch (action.type) {
     case AUTH_LOADING:
       return { ...state, isLoading: action.payload };

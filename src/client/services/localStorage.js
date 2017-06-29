@@ -1,37 +1,22 @@
-export function getInitialState() {
-  return {
-    auth: {
-      isAuthenticated: false,
-      isLoading: false,
-      hasErrored: false,
-      error: '',
-    },
-    linksMeta: {
-      isLoading: false,
-      hasErrored: false,
-      error: '',
-    },
-    links: {},
-  };
-}
+import omit from 'lodash/omit';
 
 export function loadSerializedState() {
   try {
     const serializedState = localStorage.getItem('state');
     if (serializedState === null) {
-      return getInitialState();
+      return undefined;
     }
 
     return JSON.parse(serializedState);
   } catch (err) {
-    return getInitialState();
+    return undefined;
   }
 }
 
 export function saveState(state) {
   try {
-    const copy = { ...state };
-    delete copy.form;
+    const copy = omit({ ...state }, 'form');
+    copy.auth = omit(copy.auth, 'hasErrored', 'error');
     const serializedState = JSON.stringify(copy);
     localStorage.setItem('state', serializedState);
   } catch (err) {

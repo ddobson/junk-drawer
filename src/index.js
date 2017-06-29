@@ -10,7 +10,7 @@ import Navigation from './client/containers/Navigation';
 import ProtectedRoute from './client/containers/ProtectedRoute';
 
 import configureStore from './client/config/configureStore';
-import { loadSerializedState, saveState } from './client/config/localStorage';
+import { loadSerializedState, saveState } from './client/services/localStorage';
 import registerServiceWorker from './client/config/registerServiceWorker';
 import './client/styles/index.scss';
 

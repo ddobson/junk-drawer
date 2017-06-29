@@ -4,6 +4,12 @@ import {
   LINKS_FETCH_DATA_SUCCESS,
 } from '../actions/links';
 
+const metaInitialState = {
+  isLoading: false,
+  hasErrored: false,
+  error: '',
+};
+
 export function links(state = {}, action) {
   switch (action.type) {
     case LINKS_FETCH_DATA_SUCCESS: {
@@ -14,7 +20,7 @@ export function links(state = {}, action) {
   }
 }
 
-export function linksMeta(state = {}, action) {
+export function linksMeta(state = metaInitialState, action) {
   switch (action.type) {
     case LINKS_HAS_ERRORED: {
       const { hasErrored, error } = action.payload;
