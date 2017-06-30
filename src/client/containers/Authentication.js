@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { CSSTransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import SignInForm from '../components/auth/SignInForm';
 import SignUpForm from '../components/auth/SignUpForm';
-import Button from '../components/ui/Button';
+import Notification from '../components/ui/Notification';
 import { validateSignIn, validateSignUp } from '../services/auth/validations';
 import { signInUser, signUpUser, authError } from '../actions/auth';
 import '../styles/Authentication.scss';
@@ -30,18 +29,16 @@ class Authentication extends Component {
   }
 
   renderErrorNotification() {
-    if (this.props.auth.hasErrored) {
+    const { auth, clearAuthErrors } = this.props;
+
+    if (auth.hasErrored) {
       return (
-        <CSSTransitionGroup
+        <Notification
+          isDanger
+          message={auth.error}
+          onDeleteClick={clearAuthErrors}
           transitionName="fade"
-          transitionAppear
-          transitionAppearTimeout={500}
-        >
-          <div className="notification is-danger">
-            <Button delete onClick={this.props.clearAuthErrors} />
-            {this.props.auth.error}
-          </div>
-        </CSSTransitionGroup>
+        />
       );
     }
 
