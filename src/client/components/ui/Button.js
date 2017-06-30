@@ -4,7 +4,8 @@ import classnames from 'classnames';
 
 const Button = function(props) {
   const btnStyle = classnames({
-    button: true,
+    button: !props.delete,
+    delete: props.delete,
     disabled: props.isDisabled,
     'is-danger': props.isDanger,
     'is-loading': props.isLoading,
@@ -20,6 +21,7 @@ const Button = function(props) {
 
 Button.propTypes = {
   children: React.PropTypes.node.isRequired,
+  delete: PropTypes.bool,
   isDisabled: PropTypes.bool,
   isDanger: PropTypes.bool,
   isLoading: PropTypes.bool,

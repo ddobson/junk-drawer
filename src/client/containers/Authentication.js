@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 
 import SignInForm from '../components/auth/SignInForm';
 import SignUpForm from '../components/auth/SignUpForm';
+import Button from '../components/ui/Button';
 import { validateSignIn, validateSignUp } from '../services/auth/validations';
 import { signInUser, signUpUser, authError } from '../actions/auth';
 import '../styles/Authentication.scss';
@@ -37,7 +38,7 @@ class Authentication extends Component {
           transitionAppearTimeout={500}
         >
           <div className="notification is-danger">
-            <button className="delete" onClick={this.props.clearAuthErrors} />
+            <Button delete onClick={this.props.clearAuthErrors} />
             {this.props.auth.error}
           </div>
         </CSSTransitionGroup>
