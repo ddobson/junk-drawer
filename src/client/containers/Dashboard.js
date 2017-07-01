@@ -20,7 +20,10 @@ Dashboard.propTypes = {
 };
 
 const mapStateToProps = state => (
-  { links: state.links }
+  {
+    links: state.links,
+    linksMeta: state.linksMeta,
+  }
 );
 
 const mapDispatchToProps = {
