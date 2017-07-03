@@ -1,0 +1,15 @@
+.loader {
+
+  &.loader-center{
+    margin: 0 auto;
+  }
+
+  &.loader-lg {
+    border: 3px solid #dbdbdb;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    height: 4.5rem;
+    width: 4.5rem;
+  }
+
+}
