@@ -1,0 +1,49 @@
+.link-wrapper{
+  border-top: 1px solid #dbdbdb;
+  display: flex;
+  flex-direction: column;
+  height: 96px;
+  transition: height 0.3s linear;
+
+  &:last-child {
+    border-bottom: 1px solid #dbdbdb;
+  }
+}
+
+.link-url{
+  padding: 12px;
+
+  .og-host-icon {
+    max-height: 12px;
+    padding-right: 6px;
+  }
+
+  .icon {
+    float: right;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .is-small {
+    margin: 4px;
+  }
+}
+
+.link-info{
+  height: auto;
+  flex: 1;
+  overflow: hidden;
+  padding: 0 12px;
+  transition: flex 0.3s linear;
+  -webkit-transition: flex 0.3s linear;
+}
+
+.collapsed .link-info{
+  flex: 0;
+}
+
+.link-wrapper.collapsed {
+  height: 48px;
+}
