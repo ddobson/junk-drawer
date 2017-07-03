@@ -42,7 +42,7 @@ const linkSchema = new Schema(
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 const Link = mongoose.model('Link', linkSchema);

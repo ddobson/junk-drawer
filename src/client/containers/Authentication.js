@@ -124,5 +124,5 @@ const mapDispatchToProps = dispatch => ({
 const AuthenticationWithRouter = withRouter(Authentication);
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  AuthenticationWithRouter,
+  AuthenticationWithRouter
 );

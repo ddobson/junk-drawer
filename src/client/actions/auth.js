@@ -78,7 +78,7 @@ export function signUpUser(formData, previousError) {
       }
     } catch (error) {
       dispatch(
-        authError({ hasErrored: true, error: error.response.data.error }),
+        authError({ hasErrored: true, error: error.response.data.error })
       );
     } finally {
       dispatch(authIsLoading(false));

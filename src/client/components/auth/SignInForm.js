@@ -36,7 +36,7 @@ class SignInForm extends Component {
             <div className="column is-offset-one-quarter is-half-tablet">
               <form
                 onSubmit={handleSubmit(values =>
-                  onSignInSubmit(values, auth.hasErrored),
+                  onSignInSubmit(values, auth.hasErrored)
                 )}
               >
                 <Field

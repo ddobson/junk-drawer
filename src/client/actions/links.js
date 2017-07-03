@@ -50,14 +50,14 @@ export function linksFetchData() {
     } catch (error) {
       if (error.response) {
         dispatch(
-          linksHasErrored({ hasErrored: true, error: error.response.data }),
+          linksHasErrored({ hasErrored: true, error: error.response.data })
         );
       } else {
         dispatch(
           linksHasErrored({
             hasErrored: true,
             error: 'Uh oh, something went wrong!',
-          }),
+          })
         );
       }
     } finally {

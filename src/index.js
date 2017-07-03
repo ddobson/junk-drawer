@@ -34,6 +34,6 @@ ReactDOM.render(
       </div>
     </BrowserRouter>
   </Provider>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );
 registerServiceWorker();
