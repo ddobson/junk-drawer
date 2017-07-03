@@ -2,7 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-const FormField = function({ id, input, label, required, type, meta: { touched, error } }) {
+const FormField = function({
+  id,
+  input,
+  label,
+  required,
+  type,
+  meta: { touched, error },
+}) {
   const inputStyle = classnames({
     input: true,
     'is-danger': error,
@@ -15,7 +22,11 @@ const FormField = function({ id, input, label, required, type, meta: { touched, 
         {required ? <span className="required"> *</span> : null}
       </label>
       <input {...input} id={id} className={inputStyle} type={type} />
-      {touched && error && <p className="help is-danger">{error}</p>}
+      {touched &&
+        error &&
+        <p className="help is-danger">
+          {error}
+        </p>}
     </div>
   );
 };

@@ -5,7 +5,7 @@ import { CSSTransitionGroup } from 'react-transition-group';
 
 import Button from './Button';
 
-const Notification = (props) => {
+const Notification = props => {
   const notificationStyle = classnames({
     notification: true,
     'is-danger': props.isDanger,

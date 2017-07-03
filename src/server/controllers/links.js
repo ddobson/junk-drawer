@@ -27,7 +27,9 @@ function _createAndSaveLink(data) {
     const newLink = new Link(data);
 
     newLink.save((err, link) => {
-      if (err) { reject(err); }
+      if (err) {
+        reject(err);
+      }
       resolve(link);
     });
   });
@@ -36,7 +38,9 @@ function _createAndSaveLink(data) {
 function _updateAndSaveLink(id, data) {
   return new Promise((resolve, reject) => {
     Link.findByIdAndUpdate(id, data, (err, link) => {
-      if (err) { reject(err); }
+      if (err) {
+        reject(err);
+      }
       resolve(link);
     });
   });
@@ -62,7 +66,9 @@ function _handleLinkErrors(err, res) {
 
 function index(req, res) {
   Link.find({ userId: req.user._id }, (err, links) => {
-    if (err) { _handleLinkErrors(err, res); }
+    if (err) {
+      _handleLinkErrors(err, res);
+    }
 
     res.json({ links });
   });

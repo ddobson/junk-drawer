@@ -1,8 +1,4 @@
-import {
-  AUTH_STATUS,
-  AUTH_LOADING,
-  AUTH_ERROR,
-} from '../actions/auth';
+import { AUTH_STATUS, AUTH_LOADING, AUTH_ERROR } from '../actions/auth';
 
 const initialState = {
   isAuthenticated: false,

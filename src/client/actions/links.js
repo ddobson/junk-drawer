@@ -28,7 +28,7 @@ export function linksFetchDataSuccess(links) {
 }
 
 export function linksFetchData() {
-  return async (dispatch) => {
+  return async dispatch => {
     const authToken = localStorage.getItem('token');
 
     try {
@@ -49,9 +49,16 @@ export function linksFetchData() {
       dispatch(linksFetchDataSuccess(links));
     } catch (error) {
       if (error.response) {
-        dispatch(linksHasErrored({ hasErrored: true, error: error.response.data }));
+        dispatch(
+          linksHasErrored({ hasErrored: true, error: error.response.data }),
+        );
       } else {
-        dispatch(linksHasErrored({ hasErrored: true, error: 'Uh oh, something went wrong!' }));
+        dispatch(
+          linksHasErrored({
+            hasErrored: true,
+            error: 'Uh oh, something went wrong!',
+          }),
+        );
       }
     } finally {
       dispatch(linksIsLoading(false));

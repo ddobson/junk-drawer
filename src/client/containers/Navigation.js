@@ -6,7 +6,7 @@ import { signOutUser } from '../actions/auth';
 import NavMenu from '../components/NavMenu';
 import '../styles/Navigation.scss';
 
-const Navigation = (props) => {
+const Navigation = props => {
   const { isAuthenticated } = props.auth;
   const { signOut } = props;
 
@@ -38,9 +38,7 @@ Navigation.propTypes = {
   }),
 };
 
-const mapStateToProps = state => (
-  { auth: state.auth }
-);
+const mapStateToProps = state => ({ auth: state.auth });
 
 const mapDispatchToProps = dispatch => ({
   signOut() {

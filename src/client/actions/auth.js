@@ -27,7 +27,7 @@ export function authError(error) {
 }
 
 export function signInUser(formData, previousError) {
-  return async (dispatch) => {
+  return async dispatch => {
     try {
       dispatch(authIsLoading(true)); // Set app to loading
 
@@ -56,7 +56,7 @@ export function signInUser(formData, previousError) {
 }
 
 export function signUpUser(formData, previousError) {
-  return async (dispatch) => {
+  return async dispatch => {
     try {
       dispatch(authIsLoading(true)); // Set app to loading
 
@@ -77,7 +77,9 @@ export function signUpUser(formData, previousError) {
         dispatch(authError({ hasErrored: false, error: '' }));
       }
     } catch (error) {
-      dispatch(authError({ hasErrored: true, error: error.response.data.error }));
+      dispatch(
+        authError({ hasErrored: true, error: error.response.data.error }),
+      );
     } finally {
       dispatch(authIsLoading(false));
     }
@@ -85,7 +87,7 @@ export function signUpUser(formData, previousError) {
 }
 
 export function signOutUser() {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(authStatus(false));
     localStorage.removeItem('token');
   };

@@ -9,13 +9,12 @@ const ProtectedRoute = function({ component: Component, ...rest }) {
   return (
     <Route
       {...rest}
-      render={props => (
-        isAuthenticated ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to={{ pathname: '/signin', state: { from: props.location } }} />
-        )
-      )}
+      render={props =>
+        isAuthenticated
+          ? <Component {...props} />
+          : <Redirect
+              to={{ pathname: '/signin', state: { from: props.location } }}
+            />}
     />
   );
 };
@@ -26,8 +25,8 @@ ProtectedRoute.propTypes = {
   component: PropTypes.func,
 };
 
-const mapStateToProps = state => (
-  { isAuthenticated: state.auth.isAuthenticated }
-);
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
 
 export default connect(mapStateToProps)(ProtectedRoute);

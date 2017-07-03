@@ -27,14 +27,18 @@ class SignInForm extends Component {
             <div className="cta-container">
               <h1 className="title">Sign In</h1>
               <span>
-                {'Don\'t have an account? '}
+                {"Don't have an account? "}
                 <Link to="/signup">Sign up!</Link>
               </span>
             </div>
           </div>
           <div className="columns">
             <div className="column is-offset-one-quarter is-half-tablet">
-              <form onSubmit={handleSubmit(values => onSignInSubmit(values, auth.hasErrored))}>
+              <form
+                onSubmit={handleSubmit(values =>
+                  onSignInSubmit(values, auth.hasErrored),
+                )}
+              >
                 <Field
                   id="email-field"
                   name="email"
@@ -53,10 +57,14 @@ class SignInForm extends Component {
                 />
                 <div className="field is-grouped">
                   <div className="control">
-                    <Button type="submit" isLoading={auth.isLoading}>Sign In</Button>
+                    <Button type="submit" isLoading={auth.isLoading}>
+                      Sign In
+                    </Button>
                   </div>
                   <div className="control">
-                    <Button isDanger type="button" onClick={reset}>Cancel</Button>
+                    <Button isDanger type="button" onClick={reset}>
+                      Cancel
+                    </Button>
                   </div>
                 </div>
               </form>

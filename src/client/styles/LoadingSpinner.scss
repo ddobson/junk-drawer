@@ -1,7 +1,6 @@
 @import '~bulma/sass/utilities/variables';
 
 .loader {
-
   &.loader-lg {
     border: 3px solid $grey-lighter;
     border-right-color: transparent;
@@ -14,5 +13,4 @@
     top: 50%;
     width: 4.5rem;
   }
-
 }

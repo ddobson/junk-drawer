@@ -15,7 +15,9 @@ const App = function(props) {
 
   return (
     <div className="App">
-      <h1>{`App Component ${props.auth.isAuthenticated ? 'Auth\'d' : 'Not Auth\'d'}`}</h1>
+      <h1>{`App Component ${props.auth.isAuthenticated
+        ? "Auth'd"
+        : "Not Auth'd"}`}</h1>
     </div>
   );
 };
@@ -29,9 +31,7 @@ App.propTypes = {
   }),
 };
 
-const mapStateToProps = state => (
-  { auth: state.auth }
-);
+const mapStateToProps = state => ({ auth: state.auth });
 
 const AppWithRouter = withRouter(App);
 

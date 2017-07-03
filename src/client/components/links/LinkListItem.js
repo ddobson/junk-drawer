@@ -39,14 +39,14 @@ class LinkListItem extends Component {
             src={`https://www.google.com/s2/favicons?domain=${originalHost}`}
             alt={`${originalHost} icon`}
           />
-          <a
-            href={shortUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={shortUrl} target="_blank" rel="noopener noreferrer">
             {shortUrl}
           </a>
-          <span className="icon" role="presentation" onClick={this.toggleCollapse}>
+          <span
+            className="icon"
+            role="presentation"
+            onClick={this.toggleCollapse}
+          >
             <i className={iconAngleStyles} />
           </span>
           <span className="icon is-small">
@@ -57,7 +57,9 @@ class LinkListItem extends Component {
           </span>
         </div>
         <div className="link-info">
-          <p>{title}</p>
+          <p>
+            {title}
+          </p>
         </div>
       </div>
     );

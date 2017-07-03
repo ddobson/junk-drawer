@@ -47,7 +47,12 @@ class Authentication extends Component {
 
   renderForm() {
     const { pathname } = this.props.history.location;
-    const { auth, onSignInSubmit, onSignUpSubmit, clearAuthErrors } = this.props;
+    const {
+      auth,
+      onSignInSubmit,
+      onSignUpSubmit,
+      clearAuthErrors,
+    } = this.props;
 
     switch (pathname) {
       case '/signin':
@@ -74,8 +79,8 @@ class Authentication extends Component {
   render() {
     return (
       <div>
-        { this.renderErrorNotification() }
-        { this.renderForm() }
+        {this.renderErrorNotification()}
+        {this.renderForm()}
       </div>
     );
   }
@@ -98,9 +103,7 @@ Authentication.propTypes = {
   }),
 };
 
-const mapStateToProps = state => (
-  { auth: state.auth }
-);
+const mapStateToProps = state => ({ auth: state.auth });
 
 const mapDispatchToProps = dispatch => ({
   onSignInSubmit(values, hasErrored) {
@@ -120,4 +123,6 @@ const mapDispatchToProps = dispatch => ({
 
 const AuthenticationWithRouter = withRouter(Authentication);
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthenticationWithRouter);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  AuthenticationWithRouter,
+);

@@ -38,10 +38,14 @@ const NewLinkForm = function(props) {
           />
           <div className="field is-grouped">
             <div className="control">
-              <Button type="submit" isLoading={linksMeta.isLoading}>Submit</Button>
+              <Button type="submit" isLoading={linksMeta.isLoading}>
+                Submit
+              </Button>
             </div>
             <div className="control">
-              <Button isDanger type="button" onClick={reset}>Cancel</Button>
+              <Button isDanger type="button" onClick={reset}>
+                Cancel
+              </Button>
             </div>
           </div>
         </form>

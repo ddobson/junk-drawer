@@ -16,7 +16,7 @@ function _formatUpdateReqData(data, user) {
   };
 }
 
-function createRebrandlyLink (data, user) {
+function createRebrandlyLink(data, user) {
   data.slashtag = `${user.userName}-${data.slashtag}`; // eslint-disable-line no-param-reassign
 
   return axios({
@@ -30,7 +30,7 @@ function createRebrandlyLink (data, user) {
   });
 }
 
-function destroyRebrandlyLink (link) {
+function destroyRebrandlyLink(link) {
   return axios({
     method: 'delete',
     url: `https://api.rebrandly.com/v1/links/${link.rebrandlyId}`,
@@ -40,7 +40,7 @@ function destroyRebrandlyLink (link) {
   });
 }
 
-function updateRebrandlyLink (data, link, user) {
+function updateRebrandlyLink(data, link, user) {
   const reqData = _formatUpdateReqData(data, user);
 
   return axios({

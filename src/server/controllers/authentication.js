@@ -12,11 +12,16 @@ function signup(req, res, next) {
   const { email, userName, password, passwordConf } = req.body;
 
   if (!email || !password || !passwordConf || !userName) {
-    res.status(400).json({ error: 'You must provide an email, username, password and password confirmation.' });
+    res.status(400).json({
+      error:
+        'You must provide an email, username, password and password confirmation.',
+    });
   }
 
   if (password !== passwordConf) {
-    res.status(422).json({ error: 'The password and password confirmation do not match.' });
+    res
+      .status(422)
+      .json({ error: 'The password and password confirmation do not match.' });
   }
 
   if (password.length < 8) {
@@ -32,12 +37,18 @@ function signup(req, res, next) {
       return res.status(422).json({ error: 'Email is already in user' });
     }
 
-    const newUser = new User({ email: email, password: password, userName: userName }); // eslint-disable-line object-shorthand,max-len
+    const newUser = new User({
+      email,
+      password,
+      userName,
+    }); // eslint-disable-line object-shorthand,max-len
 
-    newUser.save(newUser, (err) => {
+    newUser.save(newUser, err => {
       if (err) return next(err);
 
-      return res.status(201).json({ token: _tokenForUser(newUser), user: newUser });
+      return res
+        .status(201)
+        .json({ token: _tokenForUser(newUser), user: newUser });
     });
   });
 }
@@ -50,11 +61,15 @@ function changePassword(req, res) {
   const { password, newPassword } = req.body;
 
   if (!password || !newPassword) {
-    return res.status(400).json({ error: 'You must provide both the current and new passwords.' });
+    return res
+      .status(400)
+      .json({ error: 'You must provide both the current and new passwords.' });
   }
 
   if (newPassword.length < 8) {
-    return res.status(422).json({ error: 'New password must be 8 or more characters.' });
+    return res
+      .status(422)
+      .json({ error: 'New password must be 8 or more characters.' });
   }
 
   User.findById(req.user._id, (err, user) => {

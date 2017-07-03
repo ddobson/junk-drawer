@@ -59,12 +59,10 @@ Dashboard.propTypes = {
   }),
 };
 
-const mapStateToProps = state => (
-  {
-    links: state.links,
-    linksMeta: state.linksMeta,
-  }
-);
+const mapStateToProps = state => ({
+  links: state.links,
+  linksMeta: state.linksMeta,
+});
 
 const mapDispatchToProps = {
   fetchLinks: linksFetchData,

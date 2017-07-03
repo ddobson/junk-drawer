@@ -1,4 +1,4 @@
-.link-wrapper{
+.link-wrapper {
   border-top: 1px solid #dbdbdb;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@
   }
 }
 
-.link-url{
+.link-url {
   padding: 12px;
 
   .og-host-icon {
@@ -31,7 +31,7 @@
   }
 }
 
-.link-info{
+.link-info {
   height: auto;
   flex: 1;
   overflow: hidden;
@@ -40,7 +40,7 @@
   -webkit-transition: flex 0.3s linear;
 }
 
-.collapsed .link-info{
+.collapsed .link-info {
   flex: 0;
 }
 
