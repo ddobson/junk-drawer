@@ -5,8 +5,16 @@
   height: 96px;
   transition: height 0.3s linear;
 
+  .collapsed .link-info {
+    flex: 0;
+  }
+
   &:last-child {
     border-bottom: 1px solid #dbdbdb;
+  }
+
+  &.collapsed {
+    height: 48px;
   }
 }
 
@@ -38,12 +46,4 @@
   padding: 0 12px;
   transition: flex 0.3s linear;
   -webkit-transition: flex 0.3s linear;
-}
-
-.collapsed .link-info {
-  flex: 0;
-}
-
-.link-wrapper.collapsed {
-  height: 48px;
 }
