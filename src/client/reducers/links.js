@@ -13,7 +13,7 @@ const metaInitialState = {
 export function links(state = {}, action) {
   switch (action.type) {
     case LINKS_FETCH_DATA_SUCCESS: {
-      return { ...state, ...action.payload };
+      return { ...action.payload };
     }
     default:
       return state;
