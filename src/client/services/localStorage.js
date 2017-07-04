@@ -15,8 +15,10 @@ export function loadSerializedState() {
 
 export function saveState(state) {
   try {
-    const copy = omit({ ...state }, 'form');
+    let copy = { ...state };
+    copy = omit(copy, 'form');
     copy.auth = omit(copy.auth, 'hasErrored', 'error');
+
     const serializedState = JSON.stringify(copy);
     localStorage.setItem('state', serializedState);
   } catch (err) {
