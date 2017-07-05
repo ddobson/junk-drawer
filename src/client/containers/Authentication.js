@@ -8,7 +8,7 @@ import SignUpForm from '../components/auth/SignUpForm';
 import Notification from '../components/ui/Notification';
 import { validateSignIn, validateSignUp } from '../services/auth/validations';
 import { signInUser, signUpUser, authError } from '../actions/auth';
-import '../styles/Authentication.scss';
+import '../styles/components/Authentication.scss';
 
 class Authentication extends Component {
   constructor(props) {

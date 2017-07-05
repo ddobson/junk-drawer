@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import '../../styles/LinkListItem.scss';
+import '../../styles/components/LinkListItem.scss';
 
 class LinkListItem extends Component {
   constructor(props) {

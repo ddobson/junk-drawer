@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { signOutUser } from '../actions/auth';
 import NavMenu from '../components/NavMenu';
-import '../styles/Navigation.scss';
+import '../styles/components/Navigation.scss';
 
 const Navigation = props => {
   const { isAuthenticated } = props.auth;

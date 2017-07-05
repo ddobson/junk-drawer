@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
 
-import '../styles/App.scss';
+import '../styles/components/App.scss';
 
 const App = function(props) {
   const { isAuthenticated } = props.auth;
