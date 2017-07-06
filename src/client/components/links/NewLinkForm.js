@@ -6,7 +6,7 @@ import Button from '../ui/Button';
 import FormField from '../ui/FormField';
 
 const NewLinkForm = function(props) {
-  const { handleSubmit, linksMeta, reset } = props;
+  const { handleSubmit, linksMeta } = props;
 
   return (
     <div className="columns">
@@ -36,15 +36,10 @@ const NewLinkForm = function(props) {
             type="text"
             required
           />
-          <div className="field is-grouped">
+          <div className="field">
             <div className="control">
-              <Button type="submit" isLoading={linksMeta.isLoading}>
-                Submit
-              </Button>
-            </div>
-            <div className="control">
-              <Button isDanger type="button" onClick={reset}>
-                Cancel
+              <Button type="submit" isPrimary isLoading={linksMeta.isLoading}>
+                Create
               </Button>
             </div>
           </div>
@@ -59,7 +54,6 @@ NewLinkForm.propTypes = {
   linksMeta: PropTypes.shape({
     isLoading: PropTypes.bool,
   }),
-  reset: PropTypes.func,
 };
 
 export default reduxForm({ form: 'newlink' })(NewLinkForm);

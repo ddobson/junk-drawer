@@ -7,7 +7,9 @@ import Button from '../ui/Button';
 
 import '../../styles/components/LinkList.scss';
 
-const LinkList = function({ links }) {
+const LinkList = function(props) {
+  const { links, toggleNewLinkModal, isModalOpen } = props;
+
   const renderLinkListItems = () =>
     map(links, link => <LinkListItem key={link._id} link={link} />);
 
@@ -16,7 +18,14 @@ const LinkList = function({ links }) {
       <div className="column">
         <div className="link-header">
           <h1 className="title">Links</h1>
-          <Button isPrimary>New Link</Button>
+          <Button
+            isPrimary
+            isOutlined
+            disabled={isModalOpen}
+            onClick={toggleNewLinkModal}
+          >
+            New Link
+          </Button>
         </div>
         {renderLinkListItems()}
       </div>
@@ -25,7 +34,9 @@ const LinkList = function({ links }) {
 };
 
 LinkList.propTypes = {
+  isModalOpen: PropTypes.bool,
   links: PropTypes.objectOf(PropTypes.object).isRequired,
+  toggleNewLinkModal: PropTypes.func,
 };
 
 export default LinkList;

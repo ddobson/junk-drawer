@@ -4,17 +4,32 @@ import { connect } from 'react-redux';
 import { linksFetchData } from '../actions/links';
 
 import LoadingSpinner from '../components/ui/LoadingSpinner';
+import Modal from '../components/ui/Modal';
+import NewLinkForm from '../components/links/NewLinkForm';
 import LinkList from '../components/links/LinkList';
 
 class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { isModalOpen: false };
+
+    this.toggleNewLinkModal = this.toggleNewLinkModal.bind(this);
+  }
+
   componentDidMount() {
-    this.props.fetchLinks();
+    this.props.linksFetchData();
+  }
+
+  toggleNewLinkModal() {
+    this.setState({ isModalOpen: !this.state.isModalOpen });
   }
 
   render() {
-    const { isLoading } = this.props.linksMeta;
+    const { links, linksMeta } = this.props;
+    const { isModalOpen } = this.state;
 
-    if (isLoading) {
+    if (linksMeta.isLoading) {
       return (
         <section className="section">
           <div className="container">
@@ -27,7 +42,18 @@ class Dashboard extends Component {
     return (
       <section className="section">
         <div className="container">
-          <LinkList links={this.props.links} />
+          <LinkList
+            links={links}
+            toggleNewLinkModal={this.toggleNewLinkModal}
+            isModalOpen={isModalOpen}
+          />
+          <Modal
+            component={NewLinkForm}
+            isModalOpen={isModalOpen}
+            linksMeta={linksMeta}
+            modalTitle="New Link"
+            toggleModal={this.toggleNewLinkModal}
+          />
         </div>
       </section>
     );
@@ -35,10 +61,10 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  fetchLinks: PropTypes.func,
-  links: PropTypes.object, // eslint-disable-line
+  linksFetchData: PropTypes.func.isRequired,
+  links: PropTypes.objectOf(PropTypes.object).isRequired,
   linksMeta: PropTypes.shape({
-    isLoading: PropTypes.bool,
+    isLoading: PropTypes.bool.isRequired,
   }),
 };
 
@@ -48,7 +74,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  fetchLinks: linksFetchData,
+  linksFetchData,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
