@@ -2,6 +2,7 @@ import {
   LINKS_HAS_ERRORED,
   LINKS_IS_LOADING,
   LINKS_FETCH_DATA_SUCCESS,
+  LINKS_CREATE_LINK_SUCCESS,
 } from '../actions/links';
 
 const metaInitialState = {
@@ -14,6 +15,9 @@ export function links(state = {}, action) {
   switch (action.type) {
     case LINKS_FETCH_DATA_SUCCESS: {
       return { ...action.payload };
+    }
+    case LINKS_CREATE_LINK_SUCCESS: {
+      return { ...state, [action.payload._id]: action.payload };
     }
     default:
       return state;
