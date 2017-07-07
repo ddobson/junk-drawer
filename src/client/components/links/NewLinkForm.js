@@ -6,12 +6,17 @@ import Button from '../ui/Button';
 import FormField from '../ui/FormField';
 
 const NewLinkForm = function(props) {
-  const { handleSubmit, linksMeta } = props;
+  const { createLink, handleSubmit, linksMeta, toggleModal } = props;
 
   return (
     <div className="columns">
       <div className="column">
-        <form onSumit={handleSubmit}>
+        <form
+          onSubmit={handleSubmit(values => {
+            toggleModal();
+            createLink(values);
+          })}
+        >
           <Field
             id="destination-field"
             name="destination"
@@ -50,10 +55,12 @@ const NewLinkForm = function(props) {
 };
 
 NewLinkForm.propTypes = {
-  handleSubmit: PropTypes.func,
+  createLink: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
   linksMeta: PropTypes.shape({
     isLoading: PropTypes.bool,
-  }),
+  }).isRequired,
+  toggleModal: PropTypes.func.isRequired,
 };
 
 export default reduxForm({ form: 'newlink' })(NewLinkForm);

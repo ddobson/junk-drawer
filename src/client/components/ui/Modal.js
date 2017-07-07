@@ -28,7 +28,7 @@ const Modal = function({
           <p className="title">
             {modalTitle}
           </p>
-          <Component {...rest} />
+          <Component {...rest} toggleModal={toggleModal} />
         </div>
       </div>
       <button className="modal-close is-large" onClick={toggleModal} />
