@@ -13,6 +13,11 @@ class LinkListItem extends Component {
     };
 
     this.toggleCollapse = this.toggleCollapse.bind(this);
+    this.handleDestroyClick = this.handleDestroyClick.bind(this);
+  }
+
+  handleDestroyClick() {
+    this.props.destroyLink(this.props.link._id);
   }
 
   toggleCollapse() {
@@ -44,12 +49,16 @@ class LinkListItem extends Component {
           </a>
           <span
             className="icon"
-            role="presentation"
             onClick={this.toggleCollapse}
+            role="presentation"
           >
             <i className={iconAngleStyles} />
           </span>
-          <span className="icon is-small">
+          <span
+            className="icon is-small"
+            onClick={this.handleDestroyClick}
+            role="presentation"
+          >
             <i className="fa fa-trash-o" />
           </span>
           <span className="icon is-small">
@@ -67,11 +76,13 @@ class LinkListItem extends Component {
 }
 
 LinkListItem.propTypes = {
+  destroyLink: PropTypes.func.isRequired,
   link: PropTypes.shape({
+    _id: PropTypes.string,
     originalHost: PropTypes.string,
     shortUrl: PropTypes.string,
     title: PropTypes.string,
-  }),
+  }).isRequired,
 };
 
 export default LinkListItem;

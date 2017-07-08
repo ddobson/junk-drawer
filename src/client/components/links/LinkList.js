@@ -8,10 +8,12 @@ import Button from '../ui/Button';
 import '../../styles/components/LinkList.scss';
 
 const LinkList = function(props) {
-  const { links, toggleNewLinkModal, isModalOpen } = props;
+  const { destroyLink, links, toggleNewLinkModal, isModalOpen } = props;
 
   const renderLinkListItems = () =>
-    map(links, link => <LinkListItem key={link._id} link={link} />);
+    map(links, link =>
+      <LinkListItem key={link._id} link={link} destroyLink={destroyLink} />
+    );
 
   return (
     <div className="columns">
@@ -34,6 +36,7 @@ const LinkList = function(props) {
 };
 
 LinkList.propTypes = {
+  destroyLink: PropTypes.func.isRequired,
   isModalOpen: PropTypes.bool,
   links: PropTypes.objectOf(PropTypes.object).isRequired,
   toggleNewLinkModal: PropTypes.func,

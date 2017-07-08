@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { linksFetchData, linksCreateLink } from '../actions/links';
+import {
+  linksFetchData,
+  linksCreateLink,
+  linksDestroyLink,
+} from '../actions/links';
 
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import Modal from '../components/ui/Modal';
@@ -26,7 +30,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { links, linksMeta, linksCreateLink } = this.props;
+    const { links, linksMeta, linksCreateLink, linksDestroyLink } = this.props;
     const { isModalOpen } = this.state;
 
     if (linksMeta.isLoading) {
@@ -46,6 +50,7 @@ class Dashboard extends Component {
             links={links}
             toggleNewLinkModal={this.toggleNewLinkModal}
             isModalOpen={isModalOpen}
+            destroyLink={linksDestroyLink}
           />
           <Modal
             component={NewLinkForm}
@@ -63,6 +68,7 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   linksCreateLink: PropTypes.func.isRequired,
+  linksDestroyLink: PropTypes.func.isRequired,
   linksFetchData: PropTypes.func.isRequired,
   links: PropTypes.objectOf(PropTypes.object).isRequired,
   linksMeta: PropTypes.shape({
@@ -78,6 +84,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   linksFetchData,
   linksCreateLink,
+  linksDestroyLink,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
