@@ -1,8 +1,10 @@
+import omit from 'lodash/omit';
 import {
   LINKS_HAS_ERRORED,
   LINKS_IS_LOADING,
   LINKS_FETCH_DATA_SUCCESS,
   LINKS_CREATE_LINK_SUCCESS,
+  LINKS_DESTROY_LINK_SUCCESS,
 } from '../actions/links';
 
 const metaInitialState = {
@@ -18,6 +20,9 @@ export function links(state = {}, action) {
     }
     case LINKS_CREATE_LINK_SUCCESS: {
       return { ...state, [action.payload._id]: action.payload };
+    }
+    case LINKS_DESTROY_LINK_SUCCESS: {
+      return omit(state, action.payload);
     }
     default:
       return state;
