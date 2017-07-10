@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import clipboard from 'clipboard-js';
 
 import '../../styles/components/LinkListItem.scss';
 
@@ -12,8 +13,13 @@ class LinkListItem extends Component {
       isCollapsed: true,
     };
 
-    this.toggleCollapse = this.toggleCollapse.bind(this);
+    this.handleCopyClick = this.handleCopyClick.bind(this);
     this.handleDestroyClick = this.handleDestroyClick.bind(this);
+    this.toggleCollapse = this.toggleCollapse.bind(this);
+  }
+
+  handleCopyClick() {
+    clipboard.copy(this.props.link.shortUrl);
   }
 
   handleDestroyClick() {
@@ -61,7 +67,11 @@ class LinkListItem extends Component {
           >
             <i className="fa fa-trash-o" />
           </span>
-          <span className="icon is-small">
+          <span
+            className="icon is-small"
+            onClick={this.handleCopyClick}
+            role="presentation"
+          >
             <i className="fa fa-copy" />
           </span>
         </div>
