@@ -11,15 +11,25 @@ class LinkListItem extends Component {
 
     this.state = {
       isCollapsed: true,
+      copyTooltipText: 'Copy to clipboard',
     };
 
     this.handleCopyClick = this.handleCopyClick.bind(this);
     this.handleDestroyClick = this.handleDestroyClick.bind(this);
+    this.resetCopyTooltip = this.resetCopyTooltip.bind(this);
     this.toggleCollapse = this.toggleCollapse.bind(this);
   }
 
   handleCopyClick() {
-    clipboard.copy(this.props.link.shortUrl);
+    clipboard
+      .copy(this.props.link.shortUrl)
+      .then(() => this.setState({ copyTooltipText: 'Copied!' }));
+  }
+
+  resetCopyTooltip() {
+    if (this.state.copyTooltipText !== 'Copy to clipboard') {
+      this.setState({ copyTooltipText: 'Copy to clipboard' });
+    }
   }
 
   handleDestroyClick() {
@@ -68,8 +78,10 @@ class LinkListItem extends Component {
             <i className="fa fa-trash-o" />
           </span>
           <span
-            className="icon is-small"
+            aria-label={this.state.copyTooltipText}
+            className="icon is-small tooltipped tooltipped-n"
             onClick={this.handleCopyClick}
+            onMouseLeave={this.resetCopyTooltip}
             role="presentation"
           >
             <i className="fa fa-copy" />
