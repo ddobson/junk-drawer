@@ -86,6 +86,9 @@ export function linksFetchData() {
 export function linksCreateLink(data) {
   return async dispatch => {
     try {
+      const linkData = { ...data };
+      linkData.domain = { fullName: 'junk-drawer.link' };
+
       dispatch(linksIsLoading(true));
       dispatch(linksHasErrored({ hasErrored: false, error: '' }));
 
@@ -97,7 +100,7 @@ export function linksCreateLink(data) {
           authorization: authToken,
           'Content-Type': 'application/json',
         },
-        data,
+        data: linkData,
       });
 
       const link = response.data;
