@@ -71,7 +71,8 @@ class LinkListItem extends Component {
             <i className={iconAngleStyles} />
           </span>
           <span
-            className="icon is-small"
+            aria-label="Delete"
+            className="icon is-small tooltipped tooltipped-n"
             onClick={this.handleDestroyClick}
             role="presentation"
           >
