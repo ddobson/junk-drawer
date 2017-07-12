@@ -11,6 +11,7 @@ class LinkListItem extends Component {
 
     this.state = {
       isCollapsed: true,
+      isDisabled: false,
       copyTooltipText: 'Copy to clipboard',
     };
 
@@ -33,6 +34,7 @@ class LinkListItem extends Component {
   }
 
   handleDestroyClick() {
+    this.setState({ isDisabled: true });
     this.props.destroyLink(this.props.link._id);
   }
 
@@ -44,6 +46,7 @@ class LinkListItem extends Component {
     const { originalHost, shortUrl, title } = this.props.link;
     const wrapperStyles = classnames({
       'link-wrapper': true,
+      'is-disabled': this.state.isDisabled,
       collapsed: this.state.isCollapsed,
     });
     const iconAngleStyles = classnames({

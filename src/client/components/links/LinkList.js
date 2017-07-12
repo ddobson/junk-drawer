@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 import LinkListItem from './LinkListItem';
 import Button from '../ui/Button';
@@ -29,7 +30,9 @@ const LinkList = function(props) {
             New Link
           </Button>
         </div>
-        {renderLinkListItems()}
+        <CSSTransitionGroup transitionName="fade" transitionLeaveTimeout={500}>
+          {renderLinkListItems()}
+        </CSSTransitionGroup>
       </div>
     </div>
   );

@@ -16,6 +16,11 @@
   &.collapsed {
     height: 48px;
   }
+
+  &.is-disabled {
+    pointer-events: none;
+    opacity: 0.4;
+  }
 }
 
 .link-url {
