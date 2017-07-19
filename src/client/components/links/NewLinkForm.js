@@ -4,6 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 
 import Button from '../ui/Button';
 import FormField from '../ui/FormField';
+import validate from '../../services/links/validate';
 
 const NewLinkForm = function(props) {
   const { createLink, handleSubmit, linksMeta, toggleModal } = props;
@@ -63,4 +64,4 @@ NewLinkForm.propTypes = {
   toggleModal: PropTypes.func.isRequired,
 };
 
-export default reduxForm({ form: 'newlink' })(NewLinkForm);
+export default reduxForm({ form: 'newlink', validate })(NewLinkForm);

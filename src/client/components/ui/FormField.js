@@ -12,7 +12,7 @@ const FormField = function({
 }) {
   const inputStyle = classnames({
     input: true,
-    'is-danger': error,
+    'is-danger': touched && error,
   });
 
   return (
