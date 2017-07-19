@@ -17,8 +17,8 @@ const LinkList = function(props) {
     );
 
   return (
-    <div className="columns">
-      <div className="column">
+    <div className="columns is-centered">
+      <div className="column is-three-quarters-desktop">
         <div className="link-header">
           <h1 className="title">Links</h1>
           <Button

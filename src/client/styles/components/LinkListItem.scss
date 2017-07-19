@@ -2,7 +2,7 @@
   border-top: 1px solid #dbdbdb;
   display: flex;
   flex-direction: column;
-  height: 96px;
+  height: 130px;
   transition: height 0.3s linear;
 
   .collapsed .link-info {
@@ -51,4 +51,12 @@
   padding: 0 12px;
   transition: flex 0.3s linear;
   -webkit-transition: flex 0.3s linear;
+
+  .link-info-item {
+    line-height: 2.0;
+    max-width: 696px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }

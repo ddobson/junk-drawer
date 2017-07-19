@@ -43,7 +43,7 @@ class LinkListItem extends Component {
   }
 
   render() {
-    const { originalHost, shortUrl, title } = this.props.link;
+    const { destination, originalHost, shortUrl, title } = this.props.link;
     const wrapperStyles = classnames({
       'link-wrapper': true,
       'is-disabled': this.state.isDisabled,
@@ -92,8 +92,17 @@ class LinkListItem extends Component {
           </span>
         </div>
         <div className="link-info">
-          <p>
-            {title}
+          <p className="link-info-item">
+            <span className="bold">Title: </span>
+            <span className="italic">
+              {title}
+            </span>
+          </p>
+          <p className="link-info-item">
+            <span className="bold">Destination: </span>
+            <a href={destination} alt="Original link destination">
+              {destination}
+            </a>
           </p>
         </div>
       </div>
@@ -105,6 +114,7 @@ LinkListItem.propTypes = {
   destroyLink: PropTypes.func.isRequired,
   link: PropTypes.shape({
     _id: PropTypes.string,
+    destination: PropTypes.string,
     originalHost: PropTypes.string,
     shortUrl: PropTypes.string,
     title: PropTypes.string,
