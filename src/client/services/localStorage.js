@@ -17,6 +17,7 @@ export function saveState(state) {
   try {
     let copy = { ...state };
     copy = omit(copy, 'form');
+    copy = omit(copy, 'linksMeta');
     copy.auth = omit(copy.auth, 'hasErrored', 'error');
 
     const serializedState = JSON.stringify(copy);
