@@ -25,7 +25,7 @@ const Button = function(props) {
 };
 
 Button.propTypes = {
-  children: React.PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   delete: PropTypes.bool,
   disabled: PropTypes.bool,
   isDanger: PropTypes.bool,
