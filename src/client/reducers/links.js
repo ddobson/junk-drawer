@@ -10,7 +10,7 @@ import {
 const metaInitialState = {
   isLoading: false,
   hasErrored: false,
-  error: '',
+  errors: [],
 };
 
 export function links(state = {}, action) {
@@ -32,8 +32,8 @@ export function links(state = {}, action) {
 export function linksMeta(state = metaInitialState, action) {
   switch (action.type) {
     case LINKS_HAS_ERRORED: {
-      const { hasErrored, error } = action.payload;
-      return { ...state, hasErrored, error };
+      const { hasErrored, errors } = action.payload;
+      return { ...state, hasErrored, errors };
     }
     case LINKS_IS_LOADING: {
       return { ...state, isLoading: action.payload };

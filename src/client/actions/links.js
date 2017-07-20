@@ -45,12 +45,17 @@ export function linksDestroyLinkSuccess(id) {
 
 export function _linksHandleErrors(dispatch, error) {
   if (error.response) {
-    dispatch(linksHasErrored({ hasErrored: true, error: error.response.data }));
+    dispatch(
+      linksHasErrored({
+        hasErrored: true,
+        errors: error.response.data.error.errors,
+      })
+    );
   } else {
     dispatch(
       linksHasErrored({
         hasErrored: true,
-        error: 'Uh oh, something went wrong!',
+        errors: { message: 'Uh oh, something went wrong!' },
       })
     );
   }
@@ -60,7 +65,7 @@ export function linksFetchData() {
   return async dispatch => {
     try {
       dispatch(linksIsLoading(true));
-      dispatch(linksHasErrored({ hasErrored: false, error: '' }));
+      dispatch(linksHasErrored({ hasErrored: false, errors: [] }));
 
       const authToken = localStorage.getItem('token');
       const response = await axios({
