@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { CSSTransitionGroup } from 'react-transition-group';
 
 import Button from './Button';
+import '../../styles/components/Notification.scss';
 
 const Notification = props => {
   const notificationStyle = classnames({

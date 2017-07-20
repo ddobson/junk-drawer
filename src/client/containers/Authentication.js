@@ -33,12 +33,14 @@ class Authentication extends Component {
 
     if (auth.hasErrored) {
       return (
-        <Notification
-          isDanger
-          message={auth.error}
-          onDeleteClick={clearAuthErrors}
-          transitionName="fade"
-        />
+        <div className="notifications">
+          <Notification
+            isDanger
+            message={auth.error}
+            onDeleteClick={clearAuthErrors}
+            transitionName="fade"
+          />
+        </div>
       );
     }
 

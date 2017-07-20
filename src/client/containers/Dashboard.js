@@ -70,7 +70,9 @@ class Dashboard extends Component {
 
     return (
       <div>
-        {linksMeta.hasErrored ? this.renderErrorMessages() : null}
+        <div className="notifications">
+          {linksMeta.hasErrored ? this.renderErrorMessages() : null}
+        </div>
         <section className="section">
           <div className="container">
             <LinkList
