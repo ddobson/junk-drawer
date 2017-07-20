@@ -30,7 +30,11 @@ const LinkList = function(props) {
             New Link
           </Button>
         </div>
-        <CSSTransitionGroup transitionName="fade" transitionLeaveTimeout={500}>
+        <CSSTransitionGroup
+          transitionName="fade"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
+        >
           {renderLinkListItems()}
         </CSSTransitionGroup>
       </div>
