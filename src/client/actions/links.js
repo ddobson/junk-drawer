@@ -1,9 +1,11 @@
 import axios from 'axios';
 import keyBy from 'lodash/keyBy';
+import keyIndex from 'react-key-index';
 import apiOrigin from '../config/apiOrigin';
 
 export const LINKS_HAS_ERRORED = 'LINKS_HAS_ERRORED';
 export const LINKS_IS_LOADING = 'LINKS_IS_LOADING';
+export const LINKS_DISMISS_ERROR = 'LINKS_DISMISS_ERROR';
 export const LINKS_FETCH_DATA_SUCCESS = 'LINKS_FETCH_DATA_SUCCESS';
 export const LINKS_CREATE_LINK_SUCCESS = 'LINKS_CREATE_LINK_SUCCESS';
 export const LINKS_DESTROY_LINK_SUCCESS = 'LINKS_DESTROY_LINK_SUCCESS';
@@ -43,19 +45,26 @@ export function linksDestroyLinkSuccess(id) {
   };
 }
 
+export function linksDismissError(_messageId) {
+  return {
+    type: LINKS_DISMISS_ERROR,
+    payload: _messageId,
+  };
+}
+
 export function _linksHandleErrors(dispatch, error) {
   if (error.response) {
     dispatch(
       linksHasErrored({
         hasErrored: true,
-        errors: error.response.data.error.errors,
+        errors: keyIndex(error.response.data.error.errors, 1),
       })
     );
   } else {
     dispatch(
       linksHasErrored({
         hasErrored: true,
-        errors: { message: 'Uh oh, something went wrong!' },
+        errors: keyIndex([{ message: 'Uh oh, something went wrong!' }], 1),
       })
     );
   }
@@ -65,7 +74,6 @@ export function linksFetchData() {
   return async dispatch => {
     try {
       dispatch(linksIsLoading(true));
-      dispatch(linksHasErrored({ hasErrored: false, errors: [] }));
 
       const authToken = localStorage.getItem('token');
       const response = await axios({
@@ -95,7 +103,7 @@ export function linksCreateLink(data) {
       linkData.domain = { fullName: 'junk-drawer.link' };
 
       dispatch(linksIsLoading(true));
-      dispatch(linksHasErrored({ hasErrored: false, error: '' }));
+      dispatch(linksHasErrored({ hasErrored: false, errors: [] }));
 
       const authToken = localStorage.getItem('token');
       const response = await axios({

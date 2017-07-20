@@ -5,6 +5,7 @@ import {
   linksFetchData,
   linksCreateLink,
   linksDestroyLink,
+  linksDismissError,
 } from '../actions/links';
 
 import LoadingSpinner from '../components/ui/LoadingSpinner';
@@ -33,11 +34,23 @@ class Dashboard extends Component {
 
   renderErrorMessages() {
     return this.props.linksMeta.errors.map(error => {
-      const { property, message } = error;
+      const { property, message, _messageId } = error;
       const err = property
         ? `${property.charAt(0).toUpperCase() + property.slice(1)}: ${message}`
         : message;
-      return <Notification isDanger transitionName="fade" message={err} />;
+      const onDelete = _messageId => {
+        this.props.linksDismissError(_messageId);
+      };
+
+      return (
+        <Notification
+          isDanger
+          key={_messageId}
+          onDeleteClick={() => onDelete(_messageId)}
+          transitionName="fade"
+          message={err}
+        />
+      );
     });
   }
 
@@ -84,6 +97,7 @@ class Dashboard extends Component {
 Dashboard.propTypes = {
   linksCreateLink: PropTypes.func.isRequired,
   linksDestroyLink: PropTypes.func.isRequired,
+  linksDismissError: PropTypes.func.isRequired,
   linksFetchData: PropTypes.func.isRequired,
   links: PropTypes.objectOf(PropTypes.object).isRequired,
   linksMeta: PropTypes.shape({
@@ -102,6 +116,7 @@ const mapDispatchToProps = {
   linksFetchData,
   linksCreateLink,
   linksDestroyLink,
+  linksDismissError,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

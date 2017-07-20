@@ -1,7 +1,9 @@
 import omit from 'lodash/omit';
+import filter from 'lodash/filter';
 import {
   LINKS_HAS_ERRORED,
   LINKS_IS_LOADING,
+  LINKS_DISMISS_ERROR,
   LINKS_FETCH_DATA_SUCCESS,
   LINKS_CREATE_LINK_SUCCESS,
   LINKS_DESTROY_LINK_SUCCESS,
@@ -34,6 +36,15 @@ export function linksMeta(state = metaInitialState, action) {
     case LINKS_HAS_ERRORED: {
       const { hasErrored, errors } = action.payload;
       return { ...state, hasErrored, errors };
+    }
+    case LINKS_DISMISS_ERROR: {
+      const newState = { ...state };
+      newState.errors = filter(
+        newState.errors,
+        err => err._messageId !== action.payload
+      );
+      if (newState.errors.length === 0) newState.hasErrored = false;
+      return newState;
     }
     case LINKS_IS_LOADING: {
       return { ...state, isLoading: action.payload };
