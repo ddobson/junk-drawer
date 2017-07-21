@@ -9,6 +9,7 @@ const cors = require('cors');
 const database = require('./server/config/database');
 const api = require('./server/routes/api');
 const auth = require('./server/routes/auth');
+const clientOrigin = require('./server/config/clientOrigin');
 
 const app = express();
 
@@ -17,7 +18,7 @@ database.connectToDatabase();
 
 // MIDDLEWARE
 app.use(morgan('combined'));
-app.use(cors());
+app.use(cors({ origin: clientOrigin }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', api);
