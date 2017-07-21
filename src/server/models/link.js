@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const urlRegex = require('url-regex');
+const urlRegex = require('../../shared/url-regex');
 
 const Schema = mongoose.Schema;
 

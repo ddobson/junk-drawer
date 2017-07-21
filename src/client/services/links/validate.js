@@ -1,4 +1,4 @@
-import urlRegex from 'url-regex';
+import urlRegex from '../../../shared/url-regex';
 
 function validate(values) {
   const { destination, title, slashtag } = values;
