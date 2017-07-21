@@ -53,6 +53,8 @@ class SignInForm extends Component {
                   component={FormField}
                   type="text"
                   label="Username"
+                  message="Your username will be used when creating all of your
+                    links and cannot be changed. Choose wisely!"
                   required
                 />
                 <Field

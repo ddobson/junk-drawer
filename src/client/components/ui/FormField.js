@@ -6,6 +6,7 @@ const FormField = function({
   id,
   input,
   label,
+  message,
   required,
   type,
   meta: { touched, error },
@@ -27,6 +28,11 @@ const FormField = function({
         <p className="help is-danger">
           {error}
         </p>}
+      {message
+        ? <p className="help is-primary">
+            {message}
+          </p>
+        : null}
     </div>
   );
 };
@@ -39,6 +45,7 @@ FormField.propTypes = {
   required: PropTypes.bool,
   type: PropTypes.string,
   label: PropTypes.string,
+  message: PropTypes.string,
 };
 
 export default FormField;

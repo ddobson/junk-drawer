@@ -47,6 +47,11 @@ export function validateSignUp(values) {
       userName: 'Usernames may only contain alphanumberic characters',
       _error: 'Sign Up Failed',
     });
+  } else if (userName.length > 10) {
+    throw new SubmissionError({
+      userName: 'Usernames have a maximum character limit of 10.',
+      _error: 'Sign Up Failed',
+    });
   }
 
   // Validate Password
