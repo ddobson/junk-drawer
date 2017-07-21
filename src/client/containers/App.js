@@ -5,7 +5,7 @@ import { Redirect, withRouter } from 'react-router-dom';
 
 import '../styles/components/App.scss';
 
-const App = function(props) {
+const App = props => {
   const { isAuthenticated } = props.auth;
   const { pathname } = props.location;
 
@@ -15,9 +15,14 @@ const App = function(props) {
 
   return (
     <div className="App">
-      <h1>{`App Component ${props.auth.isAuthenticated
-        ? "Auth'd"
-        : "Not Auth'd"}`}</h1>
+      <section className="hero is-primary">
+        <div className="hero-body">
+          <div className="container">
+            <h1 className="title">Welcome to Junk Drawer</h1>
+            <h2 className="subtitle">Bookmarks. But shorter.</h2>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
