@@ -34,19 +34,19 @@ class Dashboard extends Component {
 
   renderErrorMessages() {
     return this.props.linksMeta.errors.map(error => {
-      const { property, message, _messageId } = error;
+      const { property, message, id } = error;
       const err = property
         ? `${property.charAt(0).toUpperCase() + property.slice(1)}: ${message}`
         : message;
-      const onDelete = _messageId => {
-        this.props.linksDismissError(_messageId);
+      const onDelete = id => {
+        this.props.linksDismissError(id);
       };
 
       return (
         <Notification
           isDanger
-          key={_messageId}
-          onDeleteClick={() => onDelete(_messageId)}
+          key={id}
+          onDeleteClick={() => onDelete(id)}
           transitionName="fade"
           message={err}
         />

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import keyBy from 'lodash/keyBy';
-import keyIndex from 'react-key-index';
+import assign from 'lodash/assign';
 import apiOrigin from '../config/apiOrigin';
 
 export const LINKS_HAS_ERRORED = 'LINKS_HAS_ERRORED';
@@ -45,26 +45,35 @@ export function linksDestroyLinkSuccess(id) {
   };
 }
 
-export function linksDismissError(_messageId) {
+export function linksDismissError(id) {
   return {
     type: LINKS_DISMISS_ERROR,
-    payload: _messageId,
+    payload: id,
   };
 }
 
 export function _linksHandleErrors(dispatch, error) {
+  function KeyId() {
+    this.id = Math.random().toString().slice(2);
+  }
+
   if (error.response) {
     dispatch(
       linksHasErrored({
         hasErrored: true,
-        errors: keyIndex(error.response.data.error.errors, 1),
+        errors: error.response.data.error.errors.map(error =>
+          assign(error, new KeyId())
+        ),
       })
     );
   } else {
+    const genericError = { message: 'Uh oh, something went wrong!' };
+    assign(genericError, new KeyId());
+
     dispatch(
       linksHasErrored({
         hasErrored: true,
-        errors: keyIndex([{ message: 'Uh oh, something went wrong!' }], 1),
+        errors: [genericError],
       })
     );
   }

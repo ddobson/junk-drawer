@@ -41,7 +41,7 @@ export function linksMeta(state = metaInitialState, action) {
       const newState = { ...state };
       newState.errors = filter(
         newState.errors,
-        err => err._messageId !== action.payload
+        err => err.id !== action.payload
       );
       if (newState.errors.length === 0) newState.hasErrored = false;
       return newState;
