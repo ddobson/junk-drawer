@@ -86,7 +86,7 @@ export function linksFetchData() {
 
       const authToken = localStorage.getItem('token');
       const response = await axios({
-        url: `${apiOrigin[process.env.NODE_ENV]}/api/links`,
+        url: `${apiOrigin}/api/links`,
         method: 'get',
         headers: {
           authorization: authToken,
@@ -116,7 +116,7 @@ export function linksCreateLink(data) {
 
       const authToken = localStorage.getItem('token');
       const response = await axios({
-        url: `${apiOrigin[process.env.NODE_ENV]}/api/links`,
+        url: `${apiOrigin}/api/links`,
         method: 'post',
         headers: {
           authorization: authToken,
@@ -141,7 +141,7 @@ export function linksDestroyLink(id) {
     try {
       const authToken = localStorage.getItem('token');
       await axios({
-        url: `${apiOrigin[process.env.NODE_ENV]}/api/links/${id}`,
+        url: `${apiOrigin}/api/links/${id}`,
         method: 'delete',
         headers: {
           authorization: authToken,

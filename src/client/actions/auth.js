@@ -32,7 +32,7 @@ export function signInUser(formData, previousError) {
       dispatch(authIsLoading(true)); // Set app to loading
 
       const signInResponse = await axios({
-        url: `${apiOrigin[process.env.NODE_ENV]}/auth/signin`,
+        url: `${apiOrigin}/auth/signin`,
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ export function signUpUser(formData, previousError) {
       dispatch(authIsLoading(true)); // Set app to loading
 
       const signUpResponse = await axios({
-        url: `${apiOrigin[process.env.NODE_ENV]}/auth/signup`,
+        url: `${apiOrigin}/auth/signup`,
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
