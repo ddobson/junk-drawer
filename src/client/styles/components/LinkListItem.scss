@@ -1,62 +1,103 @@
 .link-wrapper {
-  border-top: 1px solid #dbdbdb;
-  display: flex;
-  flex-direction: column;
-  height: 130px;
-  transition: height 0.3s linear;
-
-  .collapsed .link-info {
-    flex: 0;
-  }
-
-  &:last-child {
-    border-bottom: 1px solid #dbdbdb;
-  }
-
-  &.collapsed {
-    height: 48px;
-  }
-
   &.is-disabled {
     pointer-events: none;
     opacity: 0.4;
   }
 }
 
-.link-url {
-  padding: 12px;
-
-  .og-host-icon {
-    max-height: 12px;
-    padding-right: 12px;
+@media (max-width: 767px) {
+  .link-wrapper {
+    border-radius: 5px;
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+    margin-bottom: 1.5em;
+    padding: 1.25em;
   }
 
-  .icon {
-    float: right;
-
-    &:hover {
-      cursor: pointer;
+  .link-url {
+    .og-host-icon {
+      height: 12px;
+      padding-right: 0.5em;
     }
   }
 
-  .is-small {
-    margin: 4px;
+  .link-controls {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    margin: 1.25em 0;
+
+    .icon {
+      &.angle-icon {
+        display: none;
+      }
+    }
+  }
+
+  .link-destination {
+    display: none;
   }
 }
 
-.link-info {
-  height: auto;
-  flex: 1;
-  overflow: hidden;
-  padding: 0 12px;
-  transition: flex 0.3s linear;
-  -webkit-transition: flex 0.3s linear;
+@media (min-width: 768px) {
+  .link-wrapper {
+    border-top: 1px solid #dbdbdb;
+    display: flex;
+    flex-direction: column;
+    height: 130px;
+    transition: height 0.3s linear;
 
-  .link-info-item {
-    line-height: 2.0;
-    max-width: 696px;
+    .collapsed .link-info {
+      flex: 0;
+    }
+
+    &:last-child {
+      border-bottom: 1px solid #dbdbdb;
+    }
+
+    &.collapsed {
+      height: 48px;
+    }
+  }
+
+  .link-url {
+    padding: 12px;
+
+    .og-host-icon {
+      max-height: 12px;
+      padding-right: 12px;
+    }
+
+    .link-controls {
+      display: inline;
+    }
+
+    .icon {
+      float: right;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .is-small {
+      margin: 4px;
+    }
+  }
+
+  .link-info {
+    height: auto;
+    flex: 1;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    padding: 0 12px;
+    transition: flex 0.3s linear;
+    -webkit-transition: flex 0.3s linear;
+
+    .link-info-item {
+      line-height: 2.0;
+      max-width: 696px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 }

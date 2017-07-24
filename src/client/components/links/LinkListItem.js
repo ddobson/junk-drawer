@@ -66,39 +66,41 @@ class LinkListItem extends Component {
           <a href={shortUrl} target="_blank" rel="noopener noreferrer">
             {shortUrl}
           </a>
-          <span
-            className="icon"
-            onClick={this.toggleCollapse}
-            role="presentation"
-          >
-            <i className={iconAngleStyles} />
-          </span>
-          <span
-            aria-label="Delete"
-            className="icon is-small tooltipped tooltipped-n"
-            onClick={this.handleDestroyClick}
-            role="presentation"
-          >
-            <i className="fa fa-trash-o" />
-          </span>
-          <span
-            aria-label={this.state.copyTooltipText}
-            className="icon is-small tooltipped tooltipped-n"
-            onClick={this.handleCopyClick}
-            onMouseLeave={this.resetCopyTooltip}
-            role="presentation"
-          >
-            <i className="fa fa-copy" />
-          </span>
+          <div className="link-controls">
+            <span
+              className="icon angle-icon"
+              onClick={this.toggleCollapse}
+              role="presentation"
+            >
+              <i className={iconAngleStyles} />
+            </span>
+            <span
+              aria-label="Delete"
+              className="icon is-small tooltipped tooltipped-n"
+              onClick={this.handleDestroyClick}
+              role="presentation"
+            >
+              <i className="fa fa-trash-o" />
+            </span>
+            <span
+              aria-label={this.state.copyTooltipText}
+              className="icon is-small tooltipped tooltipped-n"
+              onClick={this.handleCopyClick}
+              onMouseLeave={this.resetCopyTooltip}
+              role="presentation"
+            >
+              <i className="fa fa-copy" />
+            </span>
+          </div>
         </div>
-        <div className="link-info">
+        <div className="link-info link-title">
           <p className="link-info-item">
             <span className="bold">Title: </span>
             <span className="italic">
               {title}
             </span>
           </p>
-          <p className="link-info-item">
+          <p className="link-info-item link-destination">
             <span className="bold">Destination: </span>
             <a href={destination} alt="Original link destination">
               {destination}
