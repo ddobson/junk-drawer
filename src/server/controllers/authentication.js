@@ -28,20 +28,24 @@ function signup(req, res, next) {
     res.status(422).json({ error: 'Password must be 8 or more characters.' });
   }
 
-  User.findOne({ email }, (err, existingUser) => {
+  User.findOne({ $or: [{ email }, { userName }] }, (err, existingUser) => {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
 
     if (existingUser) {
-      return res.status(422).json({ error: 'Email is already in use' });
+      if (existingUser.email === email) {
+        return res.status(422).json({ error: 'Email is already in use' });
+      }
+
+      return res.status(422).json({ error: 'Username is already in use' });
     }
 
     const newUser = new User({
       email,
       password,
       userName,
-    }); // eslint-disable-line object-shorthand,max-len
+    });
 
     newUser.save(newUser, err => {
       if (err) return next(err);
