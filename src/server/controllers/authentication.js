@@ -34,7 +34,7 @@ function signup(req, res, next) {
     }
 
     if (existingUser) {
-      return res.status(422).json({ error: 'Email is already in user' });
+      return res.status(422).json({ error: 'Email is already in use' });
     }
 
     const newUser = new User({
