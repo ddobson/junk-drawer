@@ -36,6 +36,7 @@ class LinkListItem extends Component {
   handleDestroyClick() {
     this.setState({ isDisabled: true });
     this.props.destroyLink(this.props.link._id);
+    this.props.updateCurrentPage();
   }
 
   toggleCollapse() {
@@ -114,6 +115,7 @@ class LinkListItem extends Component {
 
 LinkListItem.propTypes = {
   destroyLink: PropTypes.func.isRequired,
+  updateCurrentPage: PropTypes.func.isRequired,
   link: PropTypes.shape({
     _id: PropTypes.string,
     destination: PropTypes.string,

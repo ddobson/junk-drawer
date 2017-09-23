@@ -111,7 +111,7 @@ export function linksCreateLink(data) {
       const linkData = { ...data };
       linkData.domain = { fullName: 'junk-drawer.link' };
 
-      dispatch(linksIsLoading(true));
+      // dispatch(linksIsLoading(true));
       dispatch(linksHasErrored({ hasErrored: false, errors: [] }));
 
       const authToken = localStorage.getItem('token');
@@ -131,7 +131,7 @@ export function linksCreateLink(data) {
     } catch (error) {
       _linksHandleErrors(dispatch, error);
     } finally {
-      dispatch(linksIsLoading(false));
+      // dispatch(linksIsLoading(false));
     }
   };
 }
